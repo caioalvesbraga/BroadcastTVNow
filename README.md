@@ -1,2 +1,2 @@
 # ProjetoPraticoOO
-Este projeto contém o material desenvolvido para a disciplina de Orientação a Objetos
+Este repositório contém o material desenvolvido para as avaliações práticas da disciplina de Orientação a Objetos
