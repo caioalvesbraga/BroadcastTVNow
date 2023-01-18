@@ -19,13 +19,6 @@ public class Programa {
 		this.titulo = titulo;
 	}
 
-	@Override
-	public String toString() {
-		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacaoIndicativa + "\n" + "Duração: "
-				+ duracao + "\n" + "Genero: " + genero + "\n" + "Sinopse: " + sinopse + "\n" + "Horario: " + horario
-				+ "\n";
-	}
-
 	public String getClassificacaoIndicativa() {
 		return classificacaoIndicativa;
 	}
@@ -72,6 +65,13 @@ public class Programa {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+	
+	@Override
+	public String toString() {
+		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacaoIndicativa + "\n" + "Duração: "
+				+ duracao + "\n" + "Genero: " + genero + "\n" + "Sinopse: " + sinopse + "\n" + "Horario: " + horario
+				+ "\n";
 	}
 
 }

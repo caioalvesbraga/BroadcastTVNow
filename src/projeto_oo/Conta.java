@@ -11,9 +11,7 @@ public class Conta extends Dados {
 		this.senha = senha;
 	}
 
-	public String toString() {
-		return "Nome: " + nome + "\n" + "Email: " + email + "\n" + "Senha:" + senha;
-	}
+	
 
 	public String getConta() {
 		return toString();
@@ -42,6 +40,11 @@ public class Conta extends Dados {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + "\n" + "Email: " + email + "\n" + "Senha:" + senha;
 	}
 
 }

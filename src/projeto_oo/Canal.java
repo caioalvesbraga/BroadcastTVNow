@@ -12,33 +12,34 @@ public class Canal {
 		this.genero = genero;
 	}
 
-	@Override
-	public String toString() {
-		return "Canal: " + numeroEmissora + "\n" + "Emissora: " + emissora + "\n" + "Gênero: " + genero;
+	public int getNumEmissora() {
+		return numeroEmissora;
 	}
 
 	public void setNumEmissora(int emissora) {
 		this.numeroEmissora = emissora;
 	}
-
-	public int getNumEmissora() {
-		return numeroEmissora;
+	
+	public String getNomeEmissora() {
+		return emissora;
 	}
 
+	
 	public void setNomeEmissora(String nome) {
 		this.emissora = nome;
 	}
-
-	public String getNomeEmissora() {
-		return emissora;
+	
+	public String getTipoEmissora() {
+		return genero;
 	}
 
 	public void setTipoEmissora(String tipo) {
 		this.genero = tipo;
 	}
-
-	public String getTipoEmissora() {
-		return genero;
+	
+	@Override
+	public String toString() {
+		return "Canal: " + numeroEmissora + "\n" + "Emissora: " + emissora + "\n" + "Gênero: " + genero;
 	}
 
 }
