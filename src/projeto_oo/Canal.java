@@ -3,12 +3,12 @@ package projeto_oo;
 public class Canal {
 	
 	private int numeroEmissora;
-	private String emissora;
+	private String nomeEmissora;
 	private String genero;
 
 	public Canal(int numeroEmissora, String nome, String genero) {
 		this.numeroEmissora = numeroEmissora;
-		this.emissora = nome;
+		this.nomeEmissora = nome;
 		this.genero = genero;
 	}
 
@@ -21,12 +21,12 @@ public class Canal {
 	}
 	
 	public String getNomeEmissora() {
-		return emissora;
+		return nomeEmissora;
 	}
 
 	
-	public void setNomeEmissora(String nome) {
-		this.emissora = nome;
+	public void setNomeEmissora(String nomeEmissora) {
+		this.nomeEmissora = nomeEmissora;
 	}
 	
 	public String getTipoEmissora() {
@@ -39,7 +39,7 @@ public class Canal {
 	
 	@Override
 	public String toString() {
-		return "Canal: " + numeroEmissora + "\n" + "Emissora: " + emissora + "\n" + "Gênero: " + genero;
+		return "Canal: " + numeroEmissora + "\n" + "Emissora: " + nomeEmissora + "\n" + "Gênero: " + genero;
 	}
 
 }
