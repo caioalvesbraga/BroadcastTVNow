@@ -31,7 +31,7 @@ public class Conta extends Dados {
 
 	public void setProgramaFavorito(String classificacaoIndicativa, String duracao, String genero, String horario,
 			String sinopse, String titulo) {
-		this.programaFavorito = new Programa(classificacaoIndicativa, duracao, genero, horario, sinopse, titulo);
+		this.programaFavorito = new Programa(classificacaoIndicativa, duracao, genero, horario, titulo);
 	}
 
 	public int getUserId() {

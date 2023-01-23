@@ -5,17 +5,15 @@ public class Programa {
 	private String duracao;
 	private String genero;
 	private String horario;
-	private String sinopse;
 	private String titulo;
 
-	public Programa(String classificacaoIndicativa, String duracao, String genero, String horario, String sinopse,
+	public Programa(String classificacaoIndicativa, String duracao, String genero, String horario,
 			String titulo) {
 
 		this.classificacaoIndicativa = classificacaoIndicativa;
 		this.duracao = duracao;
 		this.genero = genero;
 		this.horario = horario;
-		this.sinopse = sinopse;
 		this.titulo = titulo;
 	}
 
@@ -51,14 +49,6 @@ public class Programa {
 		this.horario = horario;
 	}
 
-	public String getSinopse() {
-		return sinopse;
-	}
-
-	public void setSinopse(String sinopse) {
-		this.sinopse = sinopse;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -70,8 +60,7 @@ public class Programa {
 	@Override
 	public String toString() {
 		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacaoIndicativa + "\n" + "Duração: "
-				+ duracao + "\n" + "Genero: " + genero + "\n" + "Sinopse: " + sinopse + "\n" + "Horario: " + horario
-				+ "\n";
+				+ duracao + "\n" + "Genero: " + genero + "\n" + "Horario: " + horario+ "\n";
 	}
 
 }

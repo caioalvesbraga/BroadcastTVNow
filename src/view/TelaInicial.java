@@ -7,18 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-public class TelaInicial {
+public class TelaInicial implements ActionListener{
 	
 	private JMenuBar barraDeMenu = new JMenuBar ();
-	private JMenu listaMenu = new JMenu("Listar");
+	private	JMenu programacaoMenu = new JMenu("Programação");
 	private JMenu cadastroMenu = new JMenu("Cadastro");
-	private JMenuItem canaisItem = new JMenuItem("Canais");
-	private JMenuItem programasItem = new JMenuItem("Programas");
-	private JFrame telaInicialFrame = new JFrame();
+	private static JMenuItem canaisItem = new JMenuItem("Canais");
+	private static JMenuItem programasItem = new JMenuItem("Programas");
+	private static JFrame telaInicialFrame = new JFrame();
 	private JPanel inicialPanel = new JPanel();
 	private JLabel boasVindasText = new JLabel();
 	private ImageIcon iconeTVImage = new ImageIcon("./tv512px.png");
@@ -30,18 +32,18 @@ public class TelaInicial {
 		
 		//Barra de Menu
 		cadastroMenu.add(canaisItem); cadastroMenu.add(programasItem);
-		barraDeMenu.add(listaMenu);
+		barraDeMenu.add(programacaoMenu);
 		barraDeMenu.add(cadastroMenu);
 		barraDeMenu.setBackground(Color.LIGHT_GRAY);
 		barraDeMenu.setPreferredSize(new Dimension(960, 50));
 		
-		listaMenu.setPreferredSize(new Dimension(100,50));
+		programacaoMenu.setPreferredSize(new Dimension(120,50));
 		cadastroMenu.setPreferredSize(new Dimension(100,50));
 		
 		canaisItem.setFont(padraoFonte);
 		programasItem.setFont(padraoFonte);
 		cadastroMenu.setFont(padraoFonte);
-		listaMenu.setFont(padraoFonte);
+		programacaoMenu.setFont(padraoFonte);
 		
 		telaInicialFrame.setJMenuBar(barraDeMenu);
 		
@@ -51,7 +53,7 @@ public class TelaInicial {
 		telaInicialFrame.setTitle("BroadcastTV Now");
 		telaInicialFrame.setBounds(320, 120, 960, 640);
 		inicialPanel.setBackground(new Color(30, 30, 30));
-		telaInicialFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		telaInicialFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		inicialPanel.setVisible(true);
 		
 		//GridBagLayout
@@ -80,6 +82,20 @@ public class TelaInicial {
 	
 	public static void main(String[] args) {
 		TelaInicial tela1 = new TelaInicial();
+		canaisItem.addActionListener(tela1);
+		programasItem.addActionListener(tela1);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		
+		if(src == canaisItem) {
+			new TelaCadastroCanal();
+		} else if(src == programasItem) {
+			new TelaCadastroPrograma();
+		}
 		
 	}
 }

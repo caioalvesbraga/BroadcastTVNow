@@ -73,9 +73,7 @@ public class Teste {
 	static void testaPrograma() {
 
 		System.out.println("############## Programa ###############");
-		Programa caldeirao = new Programa("AL", "1h e 30min", "Auditório", "14h",
-				"Caldeirão é um programa de auditório\napresentado por Marcos Mion"
-				, "Caldeirao");
+		Programa caldeirao = new Programa("AL", "1h e 30min", "Auditório", "14h", "Caldeirao");
 		System.out.print(caldeirao.toString());
 		System.out.print("\n*Após os métodos sets de Programa*\n");
 		caldeirao.setClassificacaoIndicativa("A10");

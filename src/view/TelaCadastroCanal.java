@@ -2,10 +2,12 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class TelaCadastroCanal {
+public class TelaCadastroCanal implements ActionListener {
 	private JFrame cadastroFrame = new JFrame();
 	private JLabel tituloLabel;
 	private JLabel nomeLabel = new JLabel("Nome");
@@ -17,7 +19,7 @@ public class TelaCadastroCanal {
 	private JButton cancelaButton = new JButton("Cancelar");
 	private JButton consultaButton = new JButton("Consultar");
 	private JButton limpaButton = new JButton("Limpar");
-	private JButton salvaButton = new JButton("Salvar");
+	private static JButton salvaButton = new JButton("Salvar");
 	private Font padraoFonte = new Font("Bodoni MT Condensed", Font.PLAIN, 24);
 	private Font buttonFont = new Font("Bodoni MT Condensed", Font.BOLD, 26);
 	private ImageIcon iconeTVMedioImage = new ImageIcon("./tv64px.png");
@@ -30,7 +32,7 @@ public class TelaCadastroCanal {
 		cadastroFrame.setIconImage(iconeTVGrandeImage.getImage());
 		cadastroFrame.setTitle("Cadastro de Canais");
 		cadastroFrame.setBounds(320, 120, 960, 640);
-		cadastroFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cadastroFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		cadastroFrame.getContentPane().setBackground(new Color(30, 30, 30));
 		
 		
@@ -84,6 +86,8 @@ public class TelaCadastroCanal {
 		consultaButton.setFont(buttonFont);
 		consultaButton.setBackground(new Color(0,191,255));
 		
+		consultaButton.addActionListener(this);
+		
 		
 		//Painel
 		cadastroPanel.setBounds(30, 100, 890, 400);
@@ -104,8 +108,13 @@ public class TelaCadastroCanal {
 		cadastroFrame.setVisible(true);
 		
 	}
-	
-	public static void main(String[] args) {
-		TelaCadastroCanal tela2 = new TelaCadastroCanal();
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		if(src == consultaButton) {
+			new TelaConsultaCanal();
+		}
+		
 	}
 }
