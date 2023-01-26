@@ -18,9 +18,9 @@ public class TelaInicial implements ActionListener{
 	private JMenuBar barraDeMenu = new JMenuBar ();
 	private	JMenu programacaoMenu = new JMenu("Programação");
 	private JMenu cadastroMenu = new JMenu("Cadastro");
-	private static JMenuItem canaisItem = new JMenuItem("Canais");
-	private static JMenuItem programasItem = new JMenuItem("Programas");
-	private static JFrame telaInicialFrame = new JFrame();
+	private JMenuItem canaisItem = new JMenuItem("Canais");
+	private JMenuItem programasItem = new JMenuItem("Programas");
+	private JFrame telaInicialFrame = new JFrame();
 	private JPanel inicialPanel = new JPanel();
 	private JLabel boasVindasText = new JLabel();
 	private ImageIcon iconeTVImage = new ImageIcon("./tv512px.png");
@@ -41,7 +41,11 @@ public class TelaInicial implements ActionListener{
 		cadastroMenu.setPreferredSize(new Dimension(100,50));
 		
 		canaisItem.setFont(padraoFonte);
+		canaisItem.addActionListener(this);
+		
 		programasItem.setFont(padraoFonte);
+		programasItem.addActionListener(this);
+		
 		cadastroMenu.setFont(padraoFonte);
 		programacaoMenu.setFont(padraoFonte);
 		
@@ -82,8 +86,6 @@ public class TelaInicial implements ActionListener{
 	
 	public static void main(String[] args) {
 		TelaInicial tela1 = new TelaInicial();
-		canaisItem.addActionListener(tela1);
-		programasItem.addActionListener(tela1);
 		
 	}
 

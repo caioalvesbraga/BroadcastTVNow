@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+
+import controller.ControleCanal;
 
 public class TelaCadastroCanal implements ActionListener {
 	private JFrame cadastroFrame = new JFrame();
@@ -14,7 +16,7 @@ public class TelaCadastroCanal implements ActionListener {
 	private JLabel numeroLabel = new JLabel("Número");
 	private JLabel generoLabel = new JLabel("Gênero");
 	private JTextField nomeTextField = new JTextField();
-	private JTextField numeroTextField = new JTextField();
+	private JTextField numeroTextField = new JTextField("0");
 	private JComboBox generoComboBox;
 	private JButton cancelaButton = new JButton("Cancelar");
 	private JButton consultaButton = new JButton("Consultar");
@@ -25,6 +27,7 @@ public class TelaCadastroCanal implements ActionListener {
 	private ImageIcon iconeTVMedioImage = new ImageIcon("./tv64px.png");
 	private ImageIcon iconeTVGrandeImage = new ImageIcon("./tv512px.png");
 	private JPanel cadastroPanel = new JPanel(null);
+	
 	
 	public TelaCadastroCanal() {
 		
@@ -74,6 +77,8 @@ public class TelaCadastroCanal implements ActionListener {
 		salvaButton.setFont(buttonFont);
 		salvaButton.setBackground(new Color(60,179,113));
 		
+		salvaButton.addActionListener(this);
+		
 		limpaButton.setBounds(200, 300, 100, 30);
 		limpaButton.setFont(buttonFont);
 		limpaButton.setBackground(new Color(255,255,0));
@@ -108,12 +113,45 @@ public class TelaCadastroCanal implements ActionListener {
 		cadastroFrame.setVisible(true);
 		
 	}
+	
+	public void limparTelaCadastroCanal(java.awt.event.ActionEvent evt) {
+		nomeTextField.setText("");
+		numeroTextField.setText("");
+		generoComboBox.setSelectedIndex(0);
+	}
+	
+	public void salvarCanal(java.awt.event.ActionEvent evt) {
+		
+		boolean sucesso;
+		
+		try {
+			int numero = Integer.parseInt(numeroTextField.getText());
+			String tipo = generoComboBox.getSelectedItem().toString();
+			ControleCanal controleCanal = new ControleCanal();
+			sucesso = controleCanal.cadastrarCanal(nomeTextField.getText(), numero, tipo);
+			if(sucesso == true) {
+				JOptionPane.showMessageDialog(null, "O cadastro "
+						+ "foi realizado com sucesso!");
+				this.limparTelaCadastroCanal(evt);
+			} else {
+				JOptionPane.showMessageDialog(null, "Os campos não "
+						+ "foram preenchidos corretamente.");
+			}
+		} catch(Exception ex){
+			JOptionPane.showMessageDialog(null, "Erro" + ex);
+			
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == consultaButton) {
 			new TelaConsultaCanal();
+		}
+		
+		if (src == salvaButton) {
+			salvarCanal(e);
 		}
 		
 	}

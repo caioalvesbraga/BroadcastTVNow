@@ -6,17 +6,26 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaConsultaCanal {
+import controller.ControleCanal;
+import dao.ExceptionDAO;
+import model.Canal;
+
+public class TelaConsultaCanal implements ActionListener{
 	private JFrame consultaFrame = new JFrame();
 	private JLabel tituloLabel;
 	private JLabel buscaLabel = new JLabel("Digite o Canal :");
 	private JTextField buscaTextField = new JTextField();
 	private JButton buscaButton = new JButton("Buscar");
-	private JTable consultaTable;
+	private JTable canaisTable;
 	private Font padraoFonte = new Font("Bodoni MT Condensed", Font.PLAIN, 24);
 	private ImageIcon iconeTVMedioImage = new ImageIcon("./tv64px.png");
 	private ImageIcon iconeTVGrandeImage = new ImageIcon("./tv512px.png");
@@ -52,36 +61,67 @@ public class TelaConsultaCanal {
 		buscaButton.setBounds(630, 40, 100, 32);
 		buscaButton.setFont(padraoFonte);
 		
+		buscaButton.addActionListener(this);
+		
 		//Table
-		String[] colunas = {"Gênero","Nome","Número"};
-		String [][] dados = {{"Variedas", "Rede Globo", "10"}};
-		consultaTable = new JTable(dados, colunas);
-		consultaTable.setFont(padraoFonte);
-		consultaTable.getTableHeader().setFont(padraoFonte);
-		consultaTable.setRowHeight(30);
-		JScrollPane scroll = new JScrollPane(consultaTable);
-		
-		
+		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel.addColumn("Emissora");
+		tableModel.addColumn("Número");
+		tableModel.addColumn("Tipo");
+		canaisTable = new JTable(tableModel);
+		canaisTable.setFont(padraoFonte);
+		canaisTable.setBackground(new Color(220, 220, 220));
 		
 		//Painel
-		tabelaPanel.setBounds(80, 100, 650, 350);
-		tabelaPanel.add(scroll);
+		tabelaPanel.add(new JScrollPane(canaisTable));
+		tabelaPanel.setBounds(100, 100, 600, 350);
+		tabelaPanel.setBackground(Color.black);
+		tabelaPanel.setFont(padraoFonte);
 		
-		consultaPanel.add(tabelaPanel);
+		
 		consultaPanel.add(buscaLabel);
 		consultaPanel.add(buscaTextField);
 		consultaPanel.add(buscaButton);
+		consultaPanel.add(tabelaPanel);
 		consultaPanel.setBounds(30, 100, 890, 480);
 		consultaPanel.setBackground(new Color(150, 150, 150));
-		
 		consultaFrame.add(consultaPanel);
 		consultaPanel.setVisible(true);
 		consultaFrame.add(tituloLabel);
 		consultaFrame.setVisible(true);
 		
 	}
+	
+	public void consultaCanal(java.awt.event.ActionEvent evt) {
+		String nome = buscaTextField.getText();
+		DefaultTableModel tableModel = (DefaultTableModel) canaisTable.getModel();
+		tableModel.setRowCount(0);
+		ControleCanal controleCanal = new ControleCanal();
+		
+		try {
+			ArrayList <Canal> canais = controleCanal.listarCanais(nome);
+			canais.forEach((Canal canal) -> {
+				tableModel.addRow(new Object [] {canal.getEmissora(),
+												 canal.getNumero(),
+												 canal.getTipo()});
+			});
+			canaisTable.setModel(tableModel);
+		} catch(ExceptionDAO e) {
+			Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
 		
 	public static void main(String[] args) {
 		TelaConsultaCanal tela4 = new TelaConsultaCanal();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		
+		if(src == buscaButton) {
+			consultaCanal(e);
+		}
+		
 	}
 }
