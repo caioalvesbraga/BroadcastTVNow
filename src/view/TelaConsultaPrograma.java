@@ -17,7 +17,7 @@ public class TelaConsultaPrograma {
 	private JLabel buscaLabel = new JLabel("Digite o Programa :");
 	private JTextField buscaTextField = new JTextField();
 	private JButton buscaButton = new JButton("Buscar");
-	private JList programasList;
+	private JTable programasTable;
 	private Font padraoFonte = new Font("Bodoni MT Condensed", Font.PLAIN, 24);
 	private ImageIcon iconeTVMedioImage = new ImageIcon("./tv64px.png");
 	private ImageIcon iconeTVGrandeImage = new ImageIcon("./tv512px.png");
@@ -56,25 +56,31 @@ public class TelaConsultaPrograma {
 		buscaButton.setFont(padraoFonte);
 		
 		//List
-		DefaultListModel<String> programas = new DefaultListModel<String>();
-		programas.addElement("Jornal Nacional");
-		programas.addElement("Bom dia e cia");
-		programasList = new JList(programas);
-		programasList.setFont(padraoFonte);
-		programasList.setBounds(200, 100, 400, 350);
-		programasList.setBackground(new Color(220, 220, 220));
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) programasList.getCellRenderer();
-		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel.addColumn("Classificação");
+		tableModel.addColumn("Duração");
+		tableModel.addColumn("Tipo");
+		tableModel.addColumn("Título");
+		tableModel.addColumn("Horário");
+		programasTable = new JTable(tableModel);
+		programasTable.setFont(padraoFonte);
+		programasTable.setRowHeight(30);
+		programasTable.getTableHeader().setFont(padraoFonte);
+		programasTable.setBackground(new Color(220, 220, 220));
 		
 		
 		//Painel
+		tabelaPanel.setBounds(100, 100, 600, 350);
+		tabelaPanel.setFont(padraoFonte);
+		tabelaPanel.add(new JScrollPane(programasTable));
 		
+		
+		consultaPanel.setBounds(30, 100, 890, 480);
+		consultaPanel.setBackground(new Color(150, 150, 150));
 		consultaPanel.add(buscaLabel);
 		consultaPanel.add(buscaTextField);
 		consultaPanel.add(buscaButton);
-		consultaPanel.add(programasList);
-		consultaPanel.setBounds(30, 100, 890, 480);
-		consultaPanel.setBackground(new Color(150, 150, 150));
+		consultaPanel.add(tabelaPanel);
 		
 		consultaFrame.add(consultaPanel);
 		consultaPanel.setVisible(true);
