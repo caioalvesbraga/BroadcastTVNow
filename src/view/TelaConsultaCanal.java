@@ -33,6 +33,9 @@ public class TelaConsultaCanal implements ActionListener{
 	private JPanel tabelaPanel = new JPanel(new GridLayout());
 		
 	
+	/**
+	 * 
+	 */
 	public TelaConsultaCanal() {
 			
 		//Tela
@@ -63,28 +66,30 @@ public class TelaConsultaCanal implements ActionListener{
 		
 		buscaButton.addActionListener(this);
 		
-		//Table
+		//Table //Tentar consertar
 		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel.addColumn("Código");
 		tableModel.addColumn("Emissora");
 		tableModel.addColumn("Número");
 		tableModel.addColumn("Tipo");
 		canaisTable = new JTable(tableModel);
+		canaisTable.setRowHeight(30);
+		canaisTable.getTableHeader().setFont(padraoFonte);
 		canaisTable.setFont(padraoFonte);
 		canaisTable.setBackground(new Color(220, 220, 220));
 		
 		//Painel
-		tabelaPanel.add(new JScrollPane(canaisTable));
 		tabelaPanel.setBounds(100, 100, 600, 350);
-		tabelaPanel.setBackground(Color.black);
 		tabelaPanel.setFont(padraoFonte);
+		tabelaPanel.add(new JScrollPane(canaisTable));
 		
-		
+		consultaPanel.setBounds(30, 100, 890, 480);
+		consultaPanel.setBackground(new Color(150, 150, 150));
+		consultaPanel.add(tabelaPanel);
 		consultaPanel.add(buscaLabel);
 		consultaPanel.add(buscaTextField);
 		consultaPanel.add(buscaButton);
-		consultaPanel.add(tabelaPanel);
-		consultaPanel.setBounds(30, 100, 890, 480);
-		consultaPanel.setBackground(new Color(150, 150, 150));
+		
 		consultaFrame.add(consultaPanel);
 		consultaPanel.setVisible(true);
 		consultaFrame.add(tituloLabel);
@@ -101,7 +106,8 @@ public class TelaConsultaCanal implements ActionListener{
 		try {
 			ArrayList <Canal> canais = controleCanal.listarCanais(nome);
 			canais.forEach((Canal canal) -> {
-				tableModel.addRow(new Object [] {canal.getEmissora(),
+				tableModel.addRow(new Object [] {canal.getCodCanal(),
+												 canal.getEmissora(),
 												 canal.getNumero(),
 												 canal.getTipo()});
 			});

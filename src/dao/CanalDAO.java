@@ -39,8 +39,7 @@ public class CanalDAO {
 	}
 	
 	public ArrayList<Canal> listarCanal(String nome) throws ExceptionDAO{
-		String sql = "select * from canal where emissora like '%" + nome + 
-				"%' order by emissora";
+		String sql = "select * from canal where emissora like '%" + nome + "%' order by emissora";
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ArrayList<Canal> canais = null;
@@ -53,8 +52,11 @@ public class CanalDAO {
 			if(rs != null) {
 				canais = new ArrayList<Canal>();
 				while(rs.next()) {
-					Canal canal = new Canal(rs.getString("Emissora"), rs.getInt("Número"),
-							rs.getString("Tipo"));
+					Canal canal = new Canal();
+					canal.setCodCanal(rs.getInt("CodCanal"));
+					canal.setEmissora(rs.getString("Emissora"));
+					canal.setNumero(rs.getInt("Número"));
+					canal.setTipo(rs.getString("Tipo"));
 					canais.add(canal);
 				}
 			}

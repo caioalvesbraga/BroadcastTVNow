@@ -8,6 +8,7 @@ import dao.ExceptionDAO;
 
 public class Canal {
 	
+	private int codCanal;
 	private String emissora;
 	private int numero;
 	private String tipo;
@@ -46,10 +47,18 @@ public class Canal {
 		return tipo;
 	}
 
-	public void setTipoEmissora(String tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	
+	public int getCodCanal() {
+		return codCanal;
+	}
+
+	public void setCodCanal(int codCanal) {
+		this.codCanal = codCanal;
+	}
+
 	public List<Filme> getFilmes() {
 		return filmes;
 	}
