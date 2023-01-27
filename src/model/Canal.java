@@ -16,7 +16,7 @@ public class Canal {
 	private List<Seriado> seriados;
 	private List<Telejornal> telejornais;
 
-	public Canal(String emissora, int numero, String tipo ) {
+	public Canal(String emissora, int numero, String tipo) {
 		this.numero = numero;
 		this.emissora = emissora;
 		this.tipo = tipo;
@@ -100,11 +100,19 @@ public class Canal {
 	public ArrayList <Canal> listarCanais(String nome) throws ExceptionDAO{
 		return new CanalDAO().listarCanal(nome);
 	}
+	
+	public void alterarCanal(Canal canal) throws ExceptionDAO{
+		new CanalDAO().alteraCanal(canal);
+	}
+	
+	public void apagarCanal(Canal canal) throws ExceptionDAO{
+		new CanalDAO().apagarCanal(canal);
+	}
 
 	
 	@Override
 	public String toString() {
-		return "Canal: " + numero + "\n" + "Emissora: " + emissora + "\n" + "Gênero: " + tipo;
+		return "Canal: " + numero + "\n" + "Emissora: " + emissora + "\n" + "Tipo: " + tipo;
 	}
 
 }

@@ -80,4 +80,67 @@ public class CanalDAO {
 		}
 		return canais;
 	}
+	
+	public void alteraCanal(Canal canal) throws ExceptionDAO{
+		String sql = "Update Canal set emissora = ?, número = ?, tipo = ? where codCanal = ?";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		
+		try {
+			connection = new ConnectionTV().getConnection();
+			pStatement = connection.prepareStatement(sql);
+			pStatement.setString(1, canal.getEmissora());
+			pStatement.setInt(2, canal.getNumero());
+			pStatement.setString(3, canal.getTipo());
+			pStatement.setInt(4, canal.getCodCanal());
+			pStatement.execute();
+			
+		} catch (SQLException e) {
+			throw new ExceptionDAO("Erro ao alterar canal: " + e);
+		} finally {
+			
+			try {
+				if(pStatement != null) {pStatement.close();}
+			} catch(SQLException e) {
+				throw new ExceptionDAO("Erro ao fechar o pStatement");
+			}
+		
+			try {
+				if(connection != null) {connection.close();}
+				
+			} catch(SQLException e) {
+				throw new ExceptionDAO("Erro ao fechar a conexão: " + e);
+			}
+		}
+	}
+	
+	public void apagarCanal(Canal canal) throws ExceptionDAO{
+		String sql = "Delete from Canal where codCanal = ?";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		
+		try {
+			connection = new ConnectionTV().getConnection();
+			pStatement = connection.prepareStatement(sql);
+			pStatement.setInt(1, canal.getCodCanal());
+			pStatement.execute();
+			
+		} catch (SQLException e) {
+			throw new ExceptionDAO("Erro ao apagar canal: " + e);
+		} finally {
+			
+			try {
+				if(pStatement != null) {pStatement.close();}
+			} catch(SQLException e) {
+				throw new ExceptionDAO("Erro ao fechar o pStatement");
+			}
+		
+			try {
+				if(connection != null) {connection.close();}
+				
+			} catch(SQLException e) {
+				throw new ExceptionDAO("Erro ao fechar a conexão: " + e);
+			}
+		}
+	}
 }

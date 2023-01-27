@@ -1,11 +1,13 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -23,6 +26,7 @@ import controller.ControleCanal;
 import controller.ControleFilme;
 import controller.ControleSeriado;
 import controller.ControleTelejornal;
+import dao.ExceptionDAO;
 import model.Canal;
 
 public class TelaCadastroPrograma implements ActionListener{
@@ -63,7 +67,7 @@ public class TelaCadastroPrograma implements ActionListener{
 		Instancia = this;
 	}
 		
-	public void mostraTela() {
+	public void mostraTela() throws ExceptionDAO {
 		//Tela
 		cadastroFrame.setIconImage(iconeTVGrandeImage.getImage());
 		cadastroFrame.setTitle("Cadastro de Canais");
@@ -137,8 +141,9 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 	
 		
-		String[] canais = {"Globo", "MTV", "CNN"};
-		canalComboBox = new JComboBox(canais);
+		
+		canalComboBox = new JComboBox();
+		carregaDados();
 		canalComboBox.setBounds(500, 30, 100, 30);
 		canalComboBox.setFont(padraoFonte);
 		
@@ -231,6 +236,16 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 	
 	//Eventos
+	
+	public void carregaDados() throws ExceptionDAO {
+		ControleCanal controle = new  ControleCanal();
+		DefaultComboBoxModel<Canal> defaultComboBoxModel = new DefaultComboBoxModel<Canal>();
+		for(Canal canal : controle.listarCanais(null)) {
+			defaultComboBoxModel.addElement(canal.getEmissora());
+		}
+		canalComboBox.setModel(defaultComboBoxModel);
+		canalComboBox.setRenderer(new CanalListCellRenderer());
+	}
 	public void limparTelaCadastroCanal(java.awt.event.ActionEvent evt) {
 		tituloTextField.setText("");
 		horarioTextField.setText("0h0min");
@@ -245,7 +260,6 @@ public class TelaCadastroPrograma implements ActionListener{
 	public void salvarPrograma(java.awt.event.ActionEvent evt) {
 		String classificacao = classificacaoComboBox.getSelectedItem().toString();
 		String descricao = descricaoTextArea.getText();
-		int duracao = Integer.parseInt(duracaoTextField.getText());
 		String genero = generoComboBox.getSelectedItem().toString();
 		String horario = horarioTextField.getText();
 		String titulo = tituloTextField.getText();
@@ -257,18 +271,18 @@ public class TelaCadastroPrograma implements ActionListener{
 				case "Filme":
 					ControleFilme controleFilme = new ControleFilme();
 					sucesso = controleFilme.cadastrarFilme(Integer.parseInt(input3), input2, classificacao,
-							descricao, duracao, horario, titulo);
+							descricao, horario, titulo);
 					break;
 					
 				case "Seriado":
 					ControleSeriado controleSeriado = new ControleSeriado();
-					sucesso = controleSeriado.cadastrarSeriado(classificacao, descricao, duracao, horario, 
+					sucesso = controleSeriado.cadastrarSeriado(classificacao, descricao, horario, 
 							Integer.parseInt(input1), Integer.parseInt(input2), titulo);
 					break;
 				default:
 					ControleTelejornal controleTelejornal = new ControleTelejornal();
-					sucesso = controleTelejornal.cadastrarTelejornal(input1, classificacao, descricao,
-							duracao, horario, input3, titulo);
+					sucesso = controleTelejornal.cadastrarTelejornal(input1, classificacao, descricao, 
+							horario, input3, titulo);
 					break;
 				}
 				
@@ -290,7 +304,7 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ExceptionDAO {
 		TelaCadastroPrograma tela = new TelaCadastroPrograma();
 		tela.mostraTela();
 	}
@@ -323,3 +337,5 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 	} 
 }
+
+

@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +21,7 @@ import controller.ControleCanal;
 import dao.ExceptionDAO;
 import model.Canal;
 
-public class TelaConsultaCanal implements ActionListener{
+public class TelaConsultaCanal implements ActionListener, MouseListener{
 	private JFrame consultaFrame = new JFrame();
 	private JLabel tituloLabel;
 	private JLabel buscaLabel = new JLabel("Digite o Canal :");
@@ -31,12 +33,15 @@ public class TelaConsultaCanal implements ActionListener{
 	private ImageIcon iconeTVGrandeImage = new ImageIcon("./tv512px.png");
 	private JPanel consultaPanel = new JPanel(null);
 	private JPanel tabelaPanel = new JPanel(new GridLayout());
-		
+	private TelaCadastroCanal telaCadastroCanal = new TelaCadastroCanal();
 	
-	/**
-	 * 
-	 */
-	public TelaConsultaCanal() {
+	private DefaultTableModel tableModel = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int linha, int coluna) {
+			return false;
+		}
+	};
+	public void mostrarTela() {
 			
 		//Tela
 		consultaFrame.setIconImage(iconeTVGrandeImage.getImage());
@@ -67,7 +72,6 @@ public class TelaConsultaCanal implements ActionListener{
 		buscaButton.addActionListener(this);
 		
 		//Table //Tentar consertar
-		DefaultTableModel tableModel = new DefaultTableModel();
 		tableModel.addColumn("Código");
 		tableModel.addColumn("Emissora");
 		tableModel.addColumn("Número");
@@ -77,6 +81,7 @@ public class TelaConsultaCanal implements ActionListener{
 		canaisTable.getTableHeader().setFont(padraoFonte);
 		canaisTable.setFont(padraoFonte);
 		canaisTable.setBackground(new Color(220, 220, 220));
+		canaisTable.addMouseListener(this);
 		
 		//Painel
 		tabelaPanel.setBounds(100, 100, 600, 350);
@@ -116,9 +121,27 @@ public class TelaConsultaCanal implements ActionListener{
 			Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
+	
+	public void canaisTableMouseClicked(java.awt.event.MouseEvent evt) {
+		if(evt.getClickCount() == 2) {
+			Integer codCanal = (Integer) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 0);
+			String emissora = (String) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 1);
+			Integer numero = (Integer) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 2);
+			String tipo = (String) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 3);
+			
+			this.telaCadastroCanal.buscarCanal(codCanal, emissora, numero, tipo);
+			this.telaCadastroCanal.mostrarTela();
+			this.consultaFrame.dispose();;
+			
+		} else if(SwingUtilities.isRightMouseButton(evt)) {
+			
+			
+		}
+	}
 		
 	public static void main(String[] args) {
 		TelaConsultaCanal tela4 = new TelaConsultaCanal();
+		tela4.mostrarTela();
 	}
 
 	@Override
@@ -128,6 +151,39 @@ public class TelaConsultaCanal implements ActionListener{
 		if(src == buscaButton) {
 			consultaCanal(e);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object src = e.getSource();
+		if(src == canaisTable) {
+			canaisTableMouseClicked(e);
+		}
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -6,9 +6,9 @@ public class Filme extends Programa{
 	private Canal canal;
 	
 	public Filme(int avaliacao, String bilheteria, String classificacao, 
-			String descricao, int duracao, String horario, String titulo) {
+			String descricao, String horario, String titulo) {
 		
-		super(classificacao, descricao, duracao,  horario, "Filme", titulo );
+		super(classificacao, descricao, horario, "Filme", titulo );
 		this.avaliacao = avaliacao;
 		this.bilheteria = bilheteria;
 	}

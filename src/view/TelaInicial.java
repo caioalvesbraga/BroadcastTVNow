@@ -94,9 +94,11 @@ public class TelaInicial implements ActionListener{
 		Object src = e.getSource();
 		
 		if(src == canaisItem) {
-			new TelaCadastroCanal();
+			TelaCadastroCanal telaCadastroC = new TelaCadastroCanal();
+			telaCadastroC.mostrarTela();
 		} else if(src == programasItem) {
-			new TelaCadastroPrograma();
+			TelaCadastroPrograma telaCadastroP = new TelaCadastroPrograma();
+			telaCadastroP.mostraTela();
 		}
 		
 	}

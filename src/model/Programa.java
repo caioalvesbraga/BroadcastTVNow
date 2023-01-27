@@ -3,20 +3,21 @@ package model;
 public abstract class Programa {
 	protected String classificacao;
 	protected String descricao;
-	protected int duracaoMinutos;
 	protected String horario;
 	protected String tipoDePrograma;
 	protected String titulo;
+	protected Canal canal;
 
-	public Programa(String classificacao, String descricao, int duracao,
-			String horario, String tipoDePrograma, String titulo) {
+	public Programa(String classificacao, String descricao,String horario,
+			String tipoDePrograma, String titulo) {
 
 		this.classificacao = classificacao;
 		this.descricao = descricao;
-		this.duracaoMinutos = duracao;
 		this.tipoDePrograma = tipoDePrograma;
 		this.horario = horario;
 		this.titulo = titulo;
+		Canal canalInstancia = new Canal();
+		this.canal = canalInstancia;
 	}
 
 	public String getClassificacao() {
@@ -33,14 +34,6 @@ public abstract class Programa {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public int getDuracaoMinutos() {
-		return duracaoMinutos;
-	}
-
-	public void setDuracaoMin(int duracaoMinutos) {
-		this.duracaoMinutos = duracaoMinutos;
 	}
 
 	public String getTipoDePrograma() {
@@ -69,8 +62,8 @@ public abstract class Programa {
 	
 	@Override
 	public String toString() {
-		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacao + "\n" + "Duração: "
-				+ duracaoMinutos + "\n" + "Tipo: " + tipoDePrograma + "\n" + "Horario: " + horario+ "\n";
+		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacao + "\n" + 
+	"Tipo: " + tipoDePrograma + "\n" + "Horario: " + horario+ "\n";
 	}
 
 
