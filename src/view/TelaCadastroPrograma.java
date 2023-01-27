@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -43,7 +44,7 @@ public class TelaCadastroPrograma implements ActionListener{
 	private JTextField horarioTextField = new JTextField("0h0min");
 	private JTextField duracaoTextField = new JTextField("0");
 	private JTextArea descricaoTextArea = new JTextArea("");
-	private JComboBox canalComboBox;
+	private JComboBox<Object> canalComboBox;
 	private JComboBox classificacaoComboBox;
 	private JComboBox generoComboBox;
 	private JButton cancelaButton = new JButton("Cancelar");
@@ -130,7 +131,7 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 		//ComboBox
 		String[] indicacoes = {"Livre", "10 anos", "12 anos", "14 anos", "16 anos", "18 anos"};
-		classificacaoComboBox = new JComboBox(indicacoes);
+		classificacaoComboBox = new JComboBox<Object>(indicacoes);
 		classificacaoComboBox.setBounds(160, 90, 100, 30);
 		classificacaoComboBox.setFont(padraoFonte);
 		
@@ -239,9 +240,9 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 	public void carregaDados() throws ExceptionDAO {
 		ControleCanal controle = new  ControleCanal();
-		DefaultComboBoxModel<Canal> defaultComboBoxModel = new DefaultComboBoxModel<Canal>();
-		for(Canal canal : controle.listarCanais(null)) {
-			defaultComboBoxModel.addElement(canal.getEmissora());
+		ComboBoxModel<Object> defaultComboBoxModel = new DefaultComboBoxModel<Object>();
+		for(Canal canal : controle.listarCanais("")) {
+			((DefaultComboBoxModel<Object>) defaultComboBoxModel).addElement((Object)canal.getEmissora());
 		}
 		canalComboBox.setModel(defaultComboBoxModel);
 		canalComboBox.setRenderer(new CanalListCellRenderer());
