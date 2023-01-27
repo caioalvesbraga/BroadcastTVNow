@@ -55,7 +55,7 @@ public class TelaCadastroCanal implements ActionListener {
 		
 		emissoraLabel.setFont(padraoFonte);
 		Dimension nomeSize = emissoraLabel.getPreferredSize();
-		emissoraLabel.setBounds(80, 80, nomeSize.width, nomeSize.height);
+		emissoraLabel.setBounds(75, 80, nomeSize.width+10, nomeSize.height);
 		
 		numeroLabel.setFont(padraoFonte);
 		Dimension numeroSize = numeroLabel.getPreferredSize();

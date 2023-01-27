@@ -2,16 +2,24 @@ package model;
 
 public class Telejornal extends Programa{
 	private String apresentadores;
+	private int codCanal;
 	private String tipoDeJornal;
-	private Canal canal;
 	
-	public Telejornal(String apresentadores, String classificacao, String descricao,
+	/**
+	 * @param apresentadores
+	 * @param canal
+	 * @param classificacao
+	 * @param descricao
+	 * @param horario
+	 * @param tipoDeJornal
+	 * @param titulo
+	 */
+	public Telejornal(String apresentadores, String canal, String classificacao, String descricao,
 			 String horario, String tipoDeJornal, String titulo) {
 		
-		super(classificacao, descricao, horario, "Telejornal",  titulo); 
+		super(canal, classificacao, descricao, horario, "Telejornal",  titulo); 
 		this.apresentadores = apresentadores;
 		this.tipoDeJornal = tipoDeJornal;
-		Canal canal = new Canal();
 	}
 	
 	public String getApresentadores() {
@@ -20,6 +28,15 @@ public class Telejornal extends Programa{
 	public void setApresentadores(String apresentadores) {
 		this.apresentadores = apresentadores;
 	}
+	
+	public int getCodCanal() {
+		return codCanal;
+	}
+
+	public void setCodCanal(int codCanal) {
+		this.codCanal = codCanal;
+	}
+	
 	public String getTipoDeJornal() {
 		return tipoDeJornal;
 	}

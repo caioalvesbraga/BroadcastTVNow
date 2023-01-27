@@ -71,7 +71,7 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 		
 		buscaButton.addActionListener(this);
 		
-		//Table //Tentar consertar
+		//Table
 		tableModel.addColumn("Código");
 		tableModel.addColumn("Emissora");
 		tableModel.addColumn("Número");
@@ -133,10 +133,7 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 			this.telaCadastroCanal.mostrarTela();
 			this.consultaFrame.dispose();;
 			
-		} else if(SwingUtilities.isRightMouseButton(evt)) {
-			
-			
-		}
+		} 
 	}
 		
 	public static void main(String[] args) {

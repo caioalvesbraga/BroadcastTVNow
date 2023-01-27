@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
+import dao.ExceptionDAO;
+
 public class TelaInicial implements ActionListener{
 	
 	private JMenuBar barraDeMenu = new JMenuBar ();
@@ -98,7 +100,11 @@ public class TelaInicial implements ActionListener{
 			telaCadastroC.mostrarTela();
 		} else if(src == programasItem) {
 			TelaCadastroPrograma telaCadastroP = new TelaCadastroPrograma();
-			telaCadastroP.mostraTela();
+			try {
+				telaCadastroP.mostraTela();
+			} catch (ExceptionDAO e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}

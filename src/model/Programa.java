@@ -4,20 +4,31 @@ public abstract class Programa {
 	protected String classificacao;
 	protected String descricao;
 	protected String horario;
-	protected String tipoDePrograma;
+	protected String tipo;
 	protected String titulo;
-	protected Canal canal;
+	protected String canal;
 
-	public Programa(String classificacao, String descricao,String horario,
-			String tipoDePrograma, String titulo) {
+	public Programa(String canal, String classificacao, String descricao,String horario,
+			String tipo, String titulo) {
 
 		this.classificacao = classificacao;
 		this.descricao = descricao;
-		this.tipoDePrograma = tipoDePrograma;
+		this.tipo = tipo;
 		this.horario = horario;
 		this.titulo = titulo;
-		Canal canalInstancia = new Canal();
-		this.canal = canalInstancia;
+		this.canal = canal;
+	}
+
+	public Programa() {
+		
+	}
+	
+	public String getCanal() {
+		return canal;
+	}
+
+	public void setCanal(String canal) {
+		this.canal = canal;
 	}
 
 	public String getClassificacao() {
@@ -36,12 +47,12 @@ public abstract class Programa {
 		this.descricao = descricao;
 	}
 
-	public String getTipoDePrograma() {
-		return tipoDePrograma;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setTipoDePrograma(String tipoDePrograma) {
-		this.tipoDePrograma = tipoDePrograma;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getHorario() {
@@ -63,7 +74,7 @@ public abstract class Programa {
 	@Override
 	public String toString() {
 		return "Titulo: " + titulo + "\n" + "Classificação Indicativa: " + classificacao + "\n" + 
-	"Tipo: " + tipoDePrograma + "\n" + "Horario: " + horario+ "\n";
+	"Tipo: " + tipo + "\n" + "Horario: " + horario+ "\n";
 	}
 
 
