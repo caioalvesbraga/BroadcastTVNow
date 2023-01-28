@@ -101,7 +101,7 @@ public class TelaInicial implements ActionListener{
 		} else if(src == programasItem) {
 			TelaCadastroPrograma telaCadastroP = new TelaCadastroPrograma();
 			try {
-				telaCadastroP.mostraTela();
+				telaCadastroP.mostrarTela();
 			} catch (ExceptionDAO e1) {
 				e1.printStackTrace();
 			}

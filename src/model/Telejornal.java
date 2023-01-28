@@ -1,9 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+
+import dao.ExceptionDAO;
+import dao.TelejornalDAO;
+
 public class Telejornal extends Programa{
 	private String apresentadores;
-	private int codCanal;
-	private String tipoDeJornal;
+	private int codTelejornal;
+	private String genero;
 	
 	/**
 	 * @param apresentadores
@@ -15,13 +20,17 @@ public class Telejornal extends Programa{
 	 * @param titulo
 	 */
 	public Telejornal(String apresentadores, String canal, String classificacao, String descricao,
-			 String horario, String tipoDeJornal, String titulo) {
+			String genero, String horario, String titulo) {
 		
 		super(canal, classificacao, descricao, horario, "Telejornal",  titulo); 
 		this.apresentadores = apresentadores;
-		this.tipoDeJornal = tipoDeJornal;
+		this.genero = genero;
 	}
 	
+	public Telejornal() {
+		super();
+	}
+
 	public String getApresentadores() {
 		return apresentadores;
 	}
@@ -29,22 +38,38 @@ public class Telejornal extends Programa{
 		this.apresentadores = apresentadores;
 	}
 	
-	public int getCodCanal() {
-		return codCanal;
+	public int getCodTelejornal() {
+		return codTelejornal;
 	}
 
-	public void setCodCanal(int codCanal) {
-		this.codCanal = codCanal;
+	public void setCodTelejornal(int codTelejornal) {
+		this.codTelejornal = codTelejornal;
 	}
 	
-	public String getTipoDeJornal() {
-		return tipoDeJornal;
+	public String getGenero() {
+		return genero;
 	}
-	public void setTipoDeJornal(String tipoDeJornal) {
-		this.tipoDeJornal = tipoDeJornal;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 	
-	public void cadastrarTelejornal(Telejornal jornal) {
+	public void cadastrarTelejornal(Telejornal jornal) throws ExceptionDAO {
+		new TelejornalDAO().cadastrarTelejornal(jornal);
+	}
+	
+	public ArrayList<Telejornal> listarTelejornal(String nome) throws ExceptionDAO {
+		return new TelejornalDAO().listarTelejornal(nome);
+	}
+
+	public void alterarTelejornal(Telejornal telejornal) throws ExceptionDAO {
+		new TelejornalDAO().alterarTelejornal(telejornal);
 		
 	}
+
+	public void apagarTelejornal(Telejornal telejornal) throws ExceptionDAO {
+		new TelejornalDAO().apagarTelejornal(telejornal);
+		
+	}
+
+	
 }

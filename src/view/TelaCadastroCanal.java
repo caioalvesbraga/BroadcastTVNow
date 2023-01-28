@@ -167,34 +167,39 @@ public class TelaCadastroCanal implements ActionListener {
 			ControleCanal controleCanal = new ControleCanal();
 			if(this.codCanal == 0) {
 				sucesso = controleCanal.cadastrarCanal(emissora, numero, tipo);
+				if(sucesso == true) {
+					JOptionPane.showMessageDialog(null, "O cadastro de canal "
+							+ "foi realizado com sucesso!");
+					this.limparTelaCadastroCanal(evt);
+				} else {
+					JOptionPane.showMessageDialog(null, "Os campos não "
+							+ "foram preenchidos corretamente.");
+				}
 			} else {
 				sucesso = controleCanal.alterarCanal(this.codCanal, emissora, numero, tipo);
+				if(sucesso == true) {
+					JOptionPane.showMessageDialog(null, "A alteração de canal "
+							+ "foi realizada com sucesso!");
+					this.limparTelaCadastroCanal(evt);
+				} else {
+					JOptionPane.showMessageDialog(null, "Os campos não "
+							+ "foram preenchidos corretamente.");
+				}
 			}
-			if(sucesso == true) {
-				JOptionPane.showMessageDialog(null, "O cadastro "
-						+ "foi realizado com sucesso!");
-				this.limparTelaCadastroCanal(evt);
-			} else {
-				JOptionPane.showMessageDialog(null, "Os campos não "
-						+ "foram preenchidos corretamente.");
-			}
+			
 		} catch(Exception ex){
 			JOptionPane.showMessageDialog(null, "Erro" + ex);
 			
 		}
 	}
 	
-	public static void main(String[] args) {
-		TelaCadastroCanal tela = new TelaCadastroCanal();
-		tela.mostrarTela();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == consultaButton) {
 			TelaConsultaCanal telaConsulta = new TelaConsultaCanal();
 			telaConsulta.mostrarTela();
+			this.cadastroFrame.dispose();
 		}
 		
 		if (src == salvaButton) {

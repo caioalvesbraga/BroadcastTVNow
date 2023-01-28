@@ -28,7 +28,7 @@ public class ControleFilme {
 		return new Filme().listarFilme(nome);
 	}
 	
-	public boolean alteraFilme(int avaliacao, String bilheteria, String canal, String classificacao, 
+	public boolean alterarFilme(int avaliacao, String bilheteria, String canal, String classificacao, 
 			Integer codCanal, String descricao, String horario, String tipo, String titulo) throws ExceptionDAO{
 		if(avaliacao > 0 && bilheteria != null && bilheteria.length() > 0 &&  canal != null && 
 				canal.length() > 0 && classificacao != null && classificacao.length() > 0 &&
@@ -37,18 +37,18 @@ public class ControleFilme {
 			
 			Filme filme = new Filme(avaliacao, bilheteria, canal, classificacao, descricao, horario, titulo);
 			filme.setCodFilme(codCanal);
-			filme.alteraFilme(filme);
+			filme.alterarFilme(filme);
 			return true;
 		}
 		return false;
 	}
-	public boolean apagarFilme(int codFilme) throws ExceptionDAO {
+	public boolean apagarFilme(Integer codFilme) throws ExceptionDAO {
 		if(codFilme == 0) {
 			return false;
 		} else {
 			Filme filme = new Filme();
 			filme.setCodFilme(codFilme);
-			//filme.apagarCanal(filme);
+			filme.apagarFilme(filme);
 			return true;
 		}
 	} 

@@ -135,11 +135,6 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 			
 		} 
 	}
-		
-	public static void main(String[] args) {
-		TelaConsultaCanal tela4 = new TelaConsultaCanal();
-		tela4.mostrarTela();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -1,12 +1,13 @@
 package model;
 
 public abstract class Programa {
+	protected String canal;
 	protected String classificacao;
 	protected String descricao;
 	protected String horario;
 	protected String tipo;
 	protected String titulo;
-	protected String canal;
+	
 
 	public Programa(String canal, String classificacao, String descricao,String horario,
 			String tipo, String titulo) {

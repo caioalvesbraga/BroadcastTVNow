@@ -18,10 +18,6 @@ public class Filme extends Programa{
 		this.bilheteria = bilheteria;
 	}
 	
-	public Filme(String canal, String classificacao, String descricao, String horario, String tipo, String titulo) {
-		super(canal, classificacao, descricao, horario, tipo, titulo);
-	}
-	
 	public Filme() {
 		super();
 	}
@@ -63,7 +59,11 @@ public class Filme extends Programa{
 		return new FilmeDAO().listarFilme(nome);
 	}
 	
-	public void alteraFilme(Filme filme) throws ExceptionDAO{
-		new FilmeDAO().alteraFilme(filme);
+	public void alterarFilme(Filme filme) throws ExceptionDAO{
+		new FilmeDAO().alterarFilme(filme);
+	}
+	
+	public void apagarFilme(Filme filme) throws ExceptionDAO{
+		new FilmeDAO().apagarFilme(filme);
 	}
 }

@@ -10,7 +10,7 @@ import model.Canal;
 import model.Filme;
 
 public class FilmeDAO {
-public void cadastrarFilme(Filme filme) throws ExceptionDAO{
+	public void cadastrarFilme(Filme filme) throws ExceptionDAO{
 		
 		String sql = "insert into filme (avaliação, bilheteria, canal, classificação, descrição, horário, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement  pStatement = null;
@@ -91,7 +91,7 @@ public void cadastrarFilme(Filme filme) throws ExceptionDAO{
 		return filmes;
 	}
 	
-	public void alteraFilme(Filme filme) throws ExceptionDAO{
+	public void alterarFilme(Filme filme) throws ExceptionDAO{
 		String sql = "Update Filme set avaliação = ?, bilheteria = ?, canal = ?, classificação = ?, descrição = ?, horário = ?, tipo = ?, título = ? where codFilme = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
@@ -129,19 +129,19 @@ public void cadastrarFilme(Filme filme) throws ExceptionDAO{
 		}
 	}
 	
-	public void apagarCanal(Canal canal) throws ExceptionDAO{
-		String sql = "Delete from Canal where codCanal = ?";
+	public void apagarFilme(Filme filme) throws ExceptionDAO{
+		String sql = "Delete from Filme where codFilme = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
 		
 		try {
 			connection = new ConnectionTV().getConnection();
 			pStatement = connection.prepareStatement(sql);
-			pStatement.setInt(1, canal.getCodCanal());
+			pStatement.setInt(1, filme.getCodFilme());
 			pStatement.execute();
 			
 		} catch (SQLException e) {
-			throw new ExceptionDAO("Erro ao apagar canal: " + e);
+			throw new ExceptionDAO("Erro ao apagar filme: " + e);
 		} finally {
 			
 			try {

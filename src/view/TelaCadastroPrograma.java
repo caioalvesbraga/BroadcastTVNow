@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -62,7 +64,7 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 	String [] tipos = {"Filme", "Seriado", "Telejornal" };
 	private JComboBox tipoComboBox = new JComboBox(tipos);
-	private JButton cancelaButton = new JButton("Cancelar");
+	private JButton apagaButton = new JButton("Apagar");
 	private JButton consultaButton = new JButton("Consultar");
 	private JButton limpaButton = new JButton("Limpar");
 	private JButton salvaButton = new JButton("Salvar");
@@ -166,21 +168,21 @@ public class TelaCadastroPrograma implements ActionListener{
 		salvaButton.setBounds(60, 410, 100, 30);
 		salvaButton.setFont(buttonFont);
 		salvaButton.setBackground(new Color(60,179,113));
-		
 		salvaButton.addActionListener(this);
 		
 		limpaButton.setBounds(200, 410, 100, 30);
 		limpaButton.setFont(buttonFont);
 		limpaButton.setBackground(new Color(255,255,0));
+		limpaButton.addActionListener(this);
 		
-		cancelaButton.setBounds(340, 410, 110, 30);
-		cancelaButton.setFont(buttonFont);
-		cancelaButton.setBackground(new Color(215, 0, 64));
+		apagaButton.setBounds(340, 410, 110, 30);
+		apagaButton.setFont(buttonFont);
+		apagaButton.setBackground(new Color(215, 0, 64));
+		apagaButton.addActionListener(this);
 		
 		consultaButton.setBounds(490, 410, 120, 30);
 		consultaButton.setFont(buttonFont);
 		consultaButton.setBackground(new Color(0,191,255));
-		
 		consultaButton.addActionListener(this);
 		
 		
@@ -203,7 +205,7 @@ public class TelaCadastroPrograma implements ActionListener{
 		cadastroPanel.add(classificacaoComboBox);
 		cadastroPanel.add(tipoComboBox);
 		
-		cadastroPanel.add(cancelaButton);
+		cadastroPanel.add(apagaButton);
 		cadastroPanel.add(consultaButton);
 		cadastroPanel.add(limpaButton);
 		cadastroPanel.add(salvaButton);
@@ -248,7 +250,7 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 	
 	//Eventos
-	public void limparTelaCadastroCanal(java.awt.event.ActionEvent evt) {
+	public void limparTelaCadastroPrograma(java.awt.event.ActionEvent evt) {
 		tituloTextField.setText("");
 		horarioTextField.setText("0h0min");
 		duracaoTextField.setText("0");
@@ -258,7 +260,48 @@ public class TelaCadastroPrograma implements ActionListener{
 		tipoComboBox.setSelectedIndex(0);
 	}
 	
-	public void buscarFilme(Integer codFilme, String canal, String classificacao, String descricao, 
+	public void apagarPrograma(java.awt.event.ActionEvent evt) {
+		boolean sucesso = false;
+		ControleFilme controleFilme = new ControleFilme();
+		ControleSeriado controleSeriado = new ControleSeriado();
+		ControleTelejornal controleTelejornal = new ControleTelejornal();
+		
+		if(this.codFilme > 0) {
+			try {
+				sucesso = controleFilme.apagarFilme(this.codFilme);
+				if(sucesso) {
+					JOptionPane.showMessageDialog(null,"Filme apagado com sucesso!");
+					this.limparTelaCadastroPrograma(evt);
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao apagar filme. Por favor, selecione um filme");
+				}
+			} catch (ExceptionDAO ex) {
+				Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		} else if(this.codSeriado > 0) {
+			try {
+				sucesso = controleSeriado.apagarSeriado(this.codSeriado);
+				if(sucesso) {
+					JOptionPane.showMessageDialog(null, "Seriado apagado com sucesso");
+					this.limparTelaCadastroPrograma(evt);
+				}
+			}catch(ExceptionDAO ex) {
+				Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		} else if(this.codTelejornal > 0) {
+			try {
+				sucesso = controleTelejornal.apagarTelejornal(this.codTelejornal);
+				if(sucesso) {
+					JOptionPane.showMessageDialog(null, "Telejornal apagado com sucesso");
+					this.limparTelaCadastroPrograma(evt);
+				}
+			}catch(ExceptionDAO ex) {
+				Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+	}
+	
+	public void preparaFilme(Integer codFilme, String canal, String classificacao, String descricao, 
 			String tipo,  String titulo, String horario) {
 		this.codFilme = codFilme;
 		for(int contador = 0; contador < canalComboBox.getItemCount(); contador++) {
@@ -278,6 +321,46 @@ public class TelaCadastroPrograma implements ActionListener{
 		this.horarioTextField.setText(horario);
 	}
 	
+	public void preparaSeriado(Integer codSeriado, String canal, String classificacao, String descricao, 
+			String tipo,  String titulo, String horario) {
+		this.codSeriado = codSeriado;
+		for(int contador = 0; contador < canalComboBox.getItemCount(); contador++) {
+			if(canalComboBox.getItemAt(contador).equals(canal))
+				canalComboBox.setSelectedIndex(contador);
+		}
+		for(int contador = 0; contador < classificacaoComboBox.getItemCount(); contador++) {
+			if(classificacaoComboBox.getItemAt(contador).equals(classificacao))
+				classificacaoComboBox.setSelectedIndex(contador);
+		}
+		this.descricaoTextArea.setText(descricao);
+		for(int contador = 0; contador < tipoComboBox.getItemCount(); contador++) {
+			if(tipoComboBox.getItemAt(contador).equals(tipo))
+				tipoComboBox.setSelectedIndex(contador);
+		}
+		this.tituloTextField.setText(titulo);
+		this.horarioTextField.setText(horario);
+	}
+	
+	public void preparaTelejornal(Integer codTelejornal, String canal, String classificacao, String descricao, 
+			String tipo,  String titulo, String horario) {
+		
+		this.codTelejornal = codTelejornal;
+		for(int contador = 0; contador < canalComboBox.getItemCount(); contador++) {
+			if(canalComboBox.getItemAt(contador).equals(canal))
+				canalComboBox.setSelectedIndex(contador);
+		}
+		for(int contador = 0; contador < classificacaoComboBox.getItemCount(); contador++) {
+			if(classificacaoComboBox.getItemAt(contador).equals(classificacao))
+				classificacaoComboBox.setSelectedIndex(contador);
+		}
+		this.descricaoTextArea.setText(descricao);
+		for(int contador = 0; contador < tipoComboBox.getItemCount(); contador++) {
+			if(tipoComboBox.getItemAt(contador).equals(tipo))
+				tipoComboBox.setSelectedIndex(contador);
+		}
+		this.tituloTextField.setText(titulo);
+		this.horarioTextField.setText(horario);
+	}
 	
 	
 	public void salvarPrograma(java.awt.event.ActionEvent evt) {
@@ -298,9 +381,25 @@ public class TelaCadastroPrograma implements ActionListener{
 					if(this.codFilme == 0) {
 						sucesso = controleFilme.cadastrarFilme(Integer.parseInt(input3), input2, canalSelecionadoF, classificacao,
 							descricao, horario, titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "O cadastro do filme "
+									+ "foi realizado com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
 					} else {
-						sucesso = controleFilme.alteraFilme(Integer.parseInt(input3), input2, canalSelecionadoF, classificacao, 
+						sucesso = controleFilme.alterarFilme(Integer.parseInt(input3), input2, canalSelecionadoF, classificacao, 
 								this.codFilme, descricao, horario, tipo, titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "A alteração do filme "
+									+ "foi realizada com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
 					}
 					break;
 					
@@ -308,41 +407,68 @@ public class TelaCadastroPrograma implements ActionListener{
 					String canalSelecionadoS = canalComboBox.getSelectedItem().toString();
 					ControleSeriado controleSeriado = new ControleSeriado();
 	
-					sucesso = controleSeriado.cadastrarSeriado(canalSelecionadoS, classificacao, descricao, horario, 
-							Integer.parseInt(input1), Integer.parseInt(input2), titulo);
+					if(this.codSeriado == 0) {
+						sucesso = controleSeriado.cadastrarSeriado(canalSelecionadoS, classificacao, 
+								descricao, horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "O cadastro do seriado "
+									+ "foi realizado com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
+					} else {
+						sucesso = controleSeriado.alterarSeriado(canalSelecionadoS, classificacao, this.codSeriado, descricao,
+								horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "A alteração do seriado "
+									+ "foi realizada com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
+					}
 					break;
-				default:
+					
+				case "Telejornal":
 					String canalSelecionadoT = canalComboBox.getSelectedItem().toString();
 					ControleTelejornal controleTelejornal = new ControleTelejornal();
-					
-					sucesso = controleTelejornal.cadastrarTelejornal(input1, canalSelecionadoT, classificacao, descricao, 
-							horario, input3, titulo);
+	
+					if(this.codTelejornal == 0) {
+						sucesso = controleTelejornal.cadastrarTelejornal(input1, canalSelecionadoT, classificacao, 
+								descricao, input3, horario, titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "O cadastro do telejornal "
+									+ "foi realizado com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
+					} else {
+						
+						sucesso = controleTelejornal.alterarTelejornal(input1, canalSelecionadoT, classificacao, 
+								this.codTelejornal, descricao, input3, horario, titulo);
+						if(sucesso == true) {
+							JOptionPane.showMessageDialog(null, "A alteração do telejornal "
+									+ "foi realizada com sucesso!");
+							this.limparTelaCadastroPrograma(evt);
+						} else {
+							JOptionPane.showMessageDialog(null, "Os campos não "
+									+ "foram preenchidos corretamente.");
+						}
+					}
 					break;
-				}
-				
-				if(sucesso == true) {
-					JOptionPane.showMessageDialog(null, "O cadastro "
-							+ "foi realizado com sucesso!");
-					this.limparTelaCadastroCanal(evt);
-				} else {
-					JOptionPane.showMessageDialog(null, "Os campos não "
-							+ "foram preenchidos corretamente.");
 				}
 				
 			} catch(Exception ex){
 				JOptionPane.showMessageDialog(null, "Erro" + ex);
 			}
-		} else {
-			System.out.println("Algo deu errado :(");
 		}
 		
 	}
-	
-	public static void main(String[] args) throws ExceptionDAO {
-		TelaCadastroPrograma tela = new TelaCadastroPrograma();
-		tela.mostrarTela();
-	}
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -351,6 +477,7 @@ public class TelaCadastroPrograma implements ActionListener{
 		if(src == consultaButton) {
 			TelaConsultaPrograma telaConsulta = new TelaConsultaPrograma();
 			telaConsulta.mostrarTela();
+			this.cadastroFrame.dispose();
 			
 		} else if(src == salvaButton) {
 			telaDetalhe = new TelaDetalhePrograma();
@@ -368,6 +495,10 @@ public class TelaCadastroPrograma implements ActionListener{
 				break;
 			
 			}
+		} else if(src == apagaButton) {
+			apagarPrograma(e);
+		} else if(src == limpaButton) {
+			limparTelaCadastroPrograma(e);
 		}
 		
 	} 

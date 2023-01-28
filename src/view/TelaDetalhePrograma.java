@@ -25,7 +25,10 @@ public class TelaDetalhePrograma implements ActionListener{
 	private JLabel input2Label;
 	private JTextField input1TextField = new JTextField(0);
 	private JTextField input2TextField = new JTextField(0);
-	private JComboBox input1ComboBox;
+	
+	private String[] tipoDeJornal = {"Automobilístico", "Esportivo", "Informativo", "Tecnológico"};
+	private JComboBox input1ComboBox = new JComboBox(tipoDeJornal);
+	
 	private JButton enviaButton = new JButton("Enviar");
 	private ImageIcon iconeTVMedioImage = new ImageIcon("./tv64px.png");
 	private ImageIcon iconeTVGrandeImage = new ImageIcon("./tv512px.png");
@@ -39,13 +42,13 @@ public class TelaDetalhePrograma implements ActionListener{
 			
 			//Tela
 			detalheFrame.setIconImage(iconeTVGrandeImage.getImage());
-			detalheFrame.setTitle("Detalhar Programa");
+			detalheFrame.setTitle("Detalhar Filme");
 			detalheFrame.setBounds(480, 150, 600, 500);
 			detalheFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			detalheFrame.getContentPane().setBackground(new Color(30, 30, 30));
 			
 			//Label
-			tituloDialogLabel = new JLabel("Detalhar Programa", iconeTVMedioImage, JLabel.CENTER);
+			tituloDialogLabel = new JLabel("Detalhar Filme", iconeTVMedioImage, JLabel.CENTER);
 			tituloDialogLabel.setFont(new Font("Bodoni MT Condensed", Font.PLAIN, 42));
 			tituloDialogLabel.setForeground(Color.WHITE);
 			tituloDialogLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -97,13 +100,13 @@ public class TelaDetalhePrograma implements ActionListener{
 			
 			//Tela
 			detalheFrame.setIconImage(iconeTVGrandeImage.getImage());
-			detalheFrame.setTitle("Detalhar Programa");
+			detalheFrame.setTitle("Detalhar Seriado");
 			detalheFrame.setBounds(480, 150, 600, 500);
 			detalheFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			detalheFrame.getContentPane().setBackground(new Color(30, 30, 30));
 			
 			//Label
-			tituloDialogLabel = new JLabel("Detalhar Programa", iconeTVMedioImage, JLabel.CENTER);
+			tituloDialogLabel = new JLabel("Detalhar Seriado", iconeTVMedioImage, JLabel.CENTER);
 			tituloDialogLabel.setFont(new Font("Bodoni MT Condensed", Font.PLAIN, 42));
 			tituloDialogLabel.setForeground(Color.WHITE);
 			tituloDialogLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -151,13 +154,13 @@ public class TelaDetalhePrograma implements ActionListener{
 			
 			//Tela
 			detalheFrame.setIconImage(iconeTVGrandeImage.getImage());
-			detalheFrame.setTitle("Detalhar Programa");
+			detalheFrame.setTitle("Detalhar Telejornal");
 			detalheFrame.setBounds(480, 150, 600, 500);
 			detalheFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			detalheFrame.getContentPane().setBackground(new Color(30, 30, 30));
 			
 			//Label
-			tituloDialogLabel = new JLabel("Detalhar Programa", iconeTVMedioImage, JLabel.CENTER);
+			tituloDialogLabel = new JLabel("Detalhar Telejornal", iconeTVMedioImage, JLabel.CENTER);
 			tituloDialogLabel.setFont(new Font("Bodoni MT Condensed", Font.PLAIN, 42));
 			tituloDialogLabel.setForeground(Color.WHITE);
 			tituloDialogLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -177,8 +180,7 @@ public class TelaDetalhePrograma implements ActionListener{
 			input1TextField.setBounds(200, 80, 280, 30);
 			input1TextField.setFont(padraoFonte);
 			
-			String[] tipoDeJornal = {"Automobilístico", "Esportivo", "Informativo", "Tecnológico"};
-			input1ComboBox = new JComboBox(tipoDeJornal);
+			
 			input1ComboBox.setBounds(200, 150, 150, 30);
 			input1ComboBox.setFont(padraoFonte);
 			

@@ -19,9 +19,13 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControleCanal;
 import controller.ControleFilme;
+import controller.ControleSeriado;
+import controller.ControleTelejornal;
 import dao.ExceptionDAO;
 import model.Canal;
 import model.Filme;
+import model.Seriado;
+import model.Telejornal;
 
 public class TelaConsultaPrograma implements ActionListener, MouseListener {
 	
@@ -59,7 +63,7 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		
 		
 		//Label
-		tituloLabel = new JLabel("Consulta de Canal", iconeTVMedioImage, JLabel.CENTER);
+		tituloLabel = new JLabel("Consulta de Programa", iconeTVMedioImage, JLabel.CENTER);
 		tituloLabel.setFont(new Font("Bodoni MT Condensed", Font.PLAIN, 42));
 		tituloLabel.setForeground(Color.WHITE);
 		tituloLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -94,7 +98,7 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		
 		
 		//Painel
-		tabelaPanel.setBounds(100, 100, 600, 350);
+		tabelaPanel.setBounds(60, 100, 670, 350);
 		tabelaPanel.setFont(padraoFonte);
 		tabelaPanel.add(new JScrollPane(programasTable));
 		
@@ -118,9 +122,13 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		DefaultTableModel tableModel = (DefaultTableModel) programasTable.getModel();
 		tableModel.setRowCount(0);
 		ControleFilme controleFilme = new ControleFilme();
+		ControleSeriado controleSeriado = new ControleSeriado();
+		ControleTelejornal controleTelejornal = new ControleTelejornal();
 		
 		try {
 			ArrayList <Filme> filmes = controleFilme.listarFilme(nome);
+			ArrayList <Seriado> seriados = controleSeriado.listarSeriado(nome);
+			ArrayList <Telejornal> telejornais = controleTelejornal.listarTelejornal(nome);
 			filmes.forEach((Filme filme) -> {
 				tableModel.addRow(new Object [] {filme.getCodFilme(),
 												 filme.getCanal(),
@@ -130,15 +138,34 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												 filme.getTitulo(),
 												 filme.getHorario()});
 			});
+			seriados.forEach((Seriado seriado) -> {
+				tableModel.addRow(new Object[] {seriado.getCodSeriado(),
+												seriado.getCanal(),
+												seriado.getClassificacao(),
+												seriado.getDescricao(),
+												seriado.getTipo(),
+												seriado.getTitulo(),
+												seriado.getHorario()});
+			});
+			programasTable.setModel(tableModel);
+			
+			telejornais.forEach((Telejornal telejornal) -> {
+				tableModel.addRow(new Object[] {telejornal.getCodTelejornal(),
+												telejornal.getCanal(),
+												telejornal.getClassificacao(),
+												telejornal.getDescricao(),
+												telejornal.getTipo(),
+												telejornal.getTitulo(),
+												telejornal.getHorario()});
+			});
 			programasTable.setModel(tableModel);
 		} catch(ExceptionDAO e) {
 			Logger.getLogger(TelaCadastroCanal.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 	
-	public void programasTableMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
+	public void programasTableFilmeMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
 		if(evt.getClickCount() == 2) {
-			System.out.println();
 			Integer codFilme = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
 			String canal = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 1);
 			String classificacao = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 2);
@@ -147,16 +174,45 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 			String titulo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 5);
 			String horario = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 6);
 			
-			this.telaCadastroPrograma.buscarFilme(codFilme, canal, classificacao, descricao, tipo,  titulo, horario);
+			this.telaCadastroPrograma.preparaFilme(codFilme, canal, classificacao, descricao, tipo,  titulo, horario);
 			this.telaCadastroPrograma.mostrarTela();
 			this.consultaFrame.dispose();;
 			
 		} 
 	}
-		
-	public static void main(String[] args) {
-		TelaConsultaPrograma tela5 = new TelaConsultaPrograma();
-		tela5.mostrarTela();
+	
+	public void programasTableSeriadoMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
+		if(evt.getClickCount() == 2) {
+			Integer codSeriado = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
+			String canal = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 1);
+			String classificacao = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 2);
+			String descricao = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 3);
+			String tipo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 4);
+			String titulo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 5);
+			String horario = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 6);
+			
+			this.telaCadastroPrograma.preparaSeriado(codSeriado, canal, classificacao, descricao, tipo,  titulo, horario);
+			this.telaCadastroPrograma.mostrarTela();
+			this.consultaFrame.dispose();;
+			
+		} 
+	}
+	
+	public void programasTableTelejornalMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
+		if(evt.getClickCount() == 2) {
+			Integer codTelejornal = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
+			String canal = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 1);
+			String classificacao = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 2);
+			String descricao = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 3);
+			String tipo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 4);
+			String titulo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 5);
+			String horario = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 6);
+			
+			this.telaCadastroPrograma.preparaTelejornal(codTelejornal, canal, classificacao, descricao, tipo,  titulo, horario);
+			this.telaCadastroPrograma.mostrarTela();
+			this.consultaFrame.dispose();;
+			
+		} 
 	}
 
 	@Override
@@ -172,9 +228,18 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object src = e.getSource();
+		String tipo = (String) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 4);
 		if(src == programasTable) {
 			try {
-				programasTableMouseClicked(e);
+				if(tipo == "Filme") {
+					programasTableFilmeMouseClicked(e);
+				} else if(tipo == "Seriado") {
+					programasTableSeriadoMouseClicked(e);
+				} else  {
+					programasTableTelejornalMouseClicked(e);
+				}
+				
+				
 			} catch (ExceptionDAO e1) {
 				e1.printStackTrace();
 			}
