@@ -294,12 +294,13 @@ public class TelaCadastroPrograma implements ActionListener{
 	 * @param evt
 	 */
 	public void limparTelaCadastroPrograma(java.awt.event.ActionEvent evt) {
-		tituloTextField.setText("");
-		horarioTextField.setText("0h0min");
-		descricaoTextArea.setText("");
 		canalComboBox.setSelectedIndex(0);
 		classificacaoComboBox.setSelectedIndex(0);
+		dataTextField.setText("");
+		descricaoTextArea.setText("");
+		horarioTextField.setText("");
 		tipoComboBox.setSelectedIndex(0);
+		tituloTextField.setText("");
 	}
 	
 	/**
