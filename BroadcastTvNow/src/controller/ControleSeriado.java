@@ -28,13 +28,13 @@ public class ControleSeriado {
 	 * @return
 	 * @throws ExceptionDAO
 	 */
-	public boolean cadastrarSeriado(String canal, String classificacao, String descricao, 
+	public boolean cadastrarSeriado(String canal, String classificacao, String data, String descricao, 
 			String horario, int qtdEpisodios, int qtdTemporadas, String titulo) throws ExceptionDAO {
-		if( classificacao != null && classificacao.length() > 0 && descricao != null &&
-				descricao.length() > 0 && horario != null && horario.length() > 0 &&
+		if( classificacao != null && classificacao.length() > 0 && data != null && data.length() > 0 &&
+				descricao != null && descricao.length() > 0 && horario != null && horario.length() > 0 &&
 				qtdEpisodios > 0 && qtdTemporadas > 0 && titulo != null && titulo.length() > 0) 
 		{
-			Seriado seriado = new Seriado(canal, classificacao, descricao,
+			Seriado seriado = new Seriado(canal, classificacao, data, descricao,
 				 horario, qtdEpisodios, qtdTemporadas, titulo);
 			seriado.cadastrarSeriado(seriado);
 			return true;
@@ -78,13 +78,14 @@ public class ControleSeriado {
 	 * @return boolean
 	 * @throws ExceptionDAO
 	 */
-	public boolean alterarSeriado(String canal, String classificacao, int codSeriado, String descricao, 
-			String horario, int qtdEpisodios, int qtdTemporadas, String titulo) throws ExceptionDAO{
+	public boolean alterarSeriado(String canal, String classificacao, int codSeriado, String data,
+			String descricao, String horario, int qtdEpisodios, int qtdTemporadas, String titulo) throws ExceptionDAO{
+		
 		if( canal != null && canal.length() > 0 && classificacao != null && classificacao.length() > 0 &&
-				descricao != null && descricao.length() > 0  && horario != null && 
+				data != null && data.length() > 0 && descricao != null && descricao.length() > 0  && horario != null && 
 				horario.length() > 0 && qtdEpisodios > 0 && qtdTemporadas > 0 && titulo != null && titulo.length() > 0) {
 			
-			Seriado seriado = new Seriado(canal, classificacao, descricao, horario, qtdEpisodios, qtdTemporadas, titulo);
+			Seriado seriado = new Seriado(canal, classificacao, data, descricao, horario, qtdEpisodios, qtdTemporadas, titulo);
 			seriado.setCodSeriado(codSeriado);
 			seriado.alterarSeriado(seriado);
 			return true;

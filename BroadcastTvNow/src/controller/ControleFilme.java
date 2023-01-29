@@ -28,15 +28,15 @@ public class ControleFilme {
 	 * @return boolean
 	 * @throws ExceptionDAO
 	 */
-	public boolean cadastrarFilme(int avaliacao, String bilheteria, String canal, String classificacao, 
+	public boolean cadastrarFilme(int avaliacao, String bilheteria, String canal, String classificacao, String data, 
 			String descricao, String horario, String titulo) throws ExceptionDAO 
 	{
 		if(avaliacao > 0 && bilheteria != null && bilheteria.length() > 0 &&  canal != null && 
 				canal.length() > 0 && classificacao != null && classificacao.length() > 0 &&
-				descricao != null && descricao.length() > 0  && horario != null && 
-				horario.length() > 0 && titulo != null && titulo.length() > 0) {
+				data != null && data.length() > 0 && descricao != null && descricao.length() > 0  &&
+				horario != null && horario.length() > 0 && titulo != null && titulo.length() > 0) {
 			
-			Filme novoFilme = new Filme(avaliacao,  bilheteria, canal, classificacao, descricao, 
+			Filme novoFilme = new Filme(avaliacao,  bilheteria, canal, classificacao, data, descricao, 
 					horario, titulo);
 			novoFilme.cadastrarFilme(novoFilme);
 			return true;
@@ -82,13 +82,13 @@ public class ControleFilme {
 	 * @throws ExceptionDAO
 	 */
 	public boolean alterarFilme(int avaliacao, String bilheteria, String canal, String classificacao, 
-			Integer codCanal, String descricao, String horario, String tipo, String titulo) throws ExceptionDAO{
+			Integer codCanal, String data, String descricao, String horario, String tipo, String titulo) throws ExceptionDAO{
 		if(avaliacao > 0 && bilheteria != null && bilheteria.length() > 0 &&  canal != null && 
 				canal.length() > 0 && classificacao != null && classificacao.length() > 0 &&
-				descricao != null && descricao.length() > 0  && horario != null && 
-				horario.length() > 0 && titulo != null && titulo.length() > 0) {
+				data != null && data.length() > 0 && descricao != null && descricao.length() > 0  && 
+				horario != null && horario.length() > 0 && titulo != null && titulo.length() > 0) {
 			
-			Filme filme = new Filme(avaliacao, bilheteria, canal, classificacao, descricao, horario, titulo);
+			Filme filme = new Filme(avaliacao, bilheteria, canal, classificacao, data, descricao, horario, titulo);
 			filme.setCodFilme(codCanal);
 			filme.alterarFilme(filme);
 			return true;

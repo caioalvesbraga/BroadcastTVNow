@@ -25,7 +25,7 @@ public class FilmeDAO {
 	 */
 	public void cadastrarFilme(Filme filme) throws ExceptionDAO{
 		
-		String sql = "insert into filme (avaliação, bilheteria, canal, classificação, descrição, horário, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into filme (avaliação, bilheteria, canal, classificação, dataPrograma, descrição, horário, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement  pStatement = null;
 		Connection connection = null;
 		
@@ -36,10 +36,11 @@ public class FilmeDAO {
 			pStatement.setString(2, filme.getBilheteria());
 			pStatement.setString(3, filme.getCanal());
 			pStatement.setString(4, filme.getClassificacao());
-			pStatement.setString(5, filme.getDescricao());
-			pStatement.setString(6, filme.getHorario());
-			pStatement.setString(7, filme.getTipo());
-			pStatement.setString(8, filme.getTitulo());
+			pStatement.setString(5, filme.getDataPrograma());
+			pStatement.setString(6, filme.getDescricao());
+			pStatement.setString(7, filme.getHorario());
+			pStatement.setString(8, filme.getTipo());
+			pStatement.setString(9, filme.getTitulo());
 			pStatement.execute();
 			
 		} catch(SQLException e) {
@@ -84,6 +85,7 @@ public class FilmeDAO {
 					filme.setBilheteria(rs.getString("Bilheteria"));
 					filme.setCanal(rs.getString("Canal"));
 					filme.setClassificacao(rs.getString("Classificação"));
+					filme.setDataPrograma(rs.getString("DataPrograma"));
 					filme.setDescricao(rs.getString("Descrição"));
 					filme.setHorario(rs.getString("Horário"));
 					filme.setTitulo(rs.getString("Título"));
@@ -138,6 +140,7 @@ public class FilmeDAO {
 					filme.setBilheteria(rs.getString("Bilheteria"));
 					filme.setCanal(rs.getString("Canal"));
 					filme.setClassificacao(rs.getString("Classificação"));
+					filme.setDataPrograma(rs.getString("DataPrograma"));
 					filme.setDescricao(rs.getString("Descrição"));
 					filme.setHorario(rs.getString("Horário"));
 					filme.setTitulo(rs.getString("Título"));
@@ -172,7 +175,7 @@ public class FilmeDAO {
 	 * @throws ExceptionDAO
 	 */
 	public void alterarFilme(Filme filme) throws ExceptionDAO{
-		String sql = "Update Filme set avaliação = ?, bilheteria = ?, canal = ?, classificação = ?, descrição = ?, horário = ?, tipo = ?, título = ? where codFilme = ?";
+		String sql = "Update Filme set avaliação = ?, bilheteria = ?, canal = ?, classificação = ?, dataPrograma = ?, descrição = ?, horário = ?, tipo = ?, título = ? where codFilme = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
 		
@@ -183,11 +186,12 @@ public class FilmeDAO {
 			pStatement.setString(2, filme.getBilheteria());
 			pStatement.setString(3, filme.getCanal());
 			pStatement.setString(4, filme.getClassificacao());
-			pStatement.setString(5, filme.getDescricao());
-			pStatement.setString(6, filme.getHorario());
-			pStatement.setString(7, filme.getTipo());
-			pStatement.setString(8, filme.getTitulo());
-			pStatement.setInt(9, filme.getCodFilme());
+			pStatement.setString(5, filme.getDataPrograma());
+			pStatement.setString(6, filme.getDescricao());
+			pStatement.setString(7, filme.getHorario());
+			pStatement.setString(8, filme.getTipo());
+			pStatement.setString(9, filme.getTitulo());
+			pStatement.setInt(10, filme.getCodFilme());
 			pStatement.execute();
 			
 		} catch (SQLException e) {

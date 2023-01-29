@@ -25,7 +25,7 @@ public class TelejornalDAO {
 	 */
 	public void cadastrarTelejornal(Telejornal telejornal) throws ExceptionDAO{
 		
-		String sql = "insert into telejornal (apresentadores, canal, classificação, descrição, horário, gênero, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into telejornal (apresentadores, canal, classificação, dataPrograma, descrição, horário, gênero, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement  pStatement = null;
 		Connection connection = null;
 		
@@ -35,11 +35,12 @@ public class TelejornalDAO {
 			pStatement.setString(1, telejornal.getApresentadores());
 			pStatement.setString(2, telejornal.getCanal());
 			pStatement.setString(3, telejornal.getClassificacao());
-			pStatement.setString(4, telejornal.getDescricao());
-			pStatement.setString(5, telejornal.getHorario());
-			pStatement.setString(6, telejornal.getGenero());
-			pStatement.setString(7, telejornal.getTipo());
-			pStatement.setString(8, telejornal.getTitulo());
+			pStatement.setString(4, telejornal.getDataPrograma());
+			pStatement.setString(5, telejornal.getDescricao());
+			pStatement.setString(6, telejornal.getHorario());
+			pStatement.setString(7, telejornal.getGenero());
+			pStatement.setString(8, telejornal.getTipo());
+			pStatement.setString(9, telejornal.getTitulo());
 			pStatement.execute();
 			
 		} catch(SQLException e) {
@@ -83,6 +84,7 @@ public class TelejornalDAO {
 					telejornal.setApresentadores(rs.getString("Apresentadores"));
 					telejornal.setCanal(rs.getString("Canal"));
 					telejornal.setClassificacao(rs.getString("Classificação"));
+					telejornal.setDataPrograma(rs.getString("DataPrograma"));
 					telejornal.setDescricao(rs.getString("Descrição"));;
 					telejornal.setGenero(rs.getString("Gênero"));
 					telejornal.setHorario(rs.getString("Horário"));
@@ -138,6 +140,7 @@ public class TelejornalDAO {
 					telejornal.setApresentadores(rs.getString("Apresentadores"));
 					telejornal.setCanal(rs.getString("Canal"));
 					telejornal.setClassificacao(rs.getString("Classificação"));
+					telejornal.setDataPrograma(rs.getString("DataPrograma"));
 					telejornal.setDescricao(rs.getString("Descrição"));;
 					telejornal.setGenero(rs.getString("Gênero"));
 					telejornal.setHorario(rs.getString("Horário"));
@@ -174,7 +177,7 @@ public class TelejornalDAO {
 	 * @throws ExceptionDAO
 	 */
 	public void alterarTelejornal(Telejornal telejornal) throws ExceptionDAO{
-		String sql = "Update Telejornal set apresentadores = ?, canal = ?, classificação = ?, descrição = ?, gênero = ?, horário = ?, tipo = ?, título = ? where codTelejornal = ?";
+		String sql = "Update Telejornal set apresentadores = ?, canal = ?, classificação = ?, dataPrograma = ?, descrição = ?, gênero = ?, horário = ?, tipo = ?, título = ? where codTelejornal = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
 		
@@ -184,12 +187,13 @@ public class TelejornalDAO {
 			pStatement.setString(1, telejornal.getApresentadores());
 			pStatement.setString(2, telejornal.getCanal());
 			pStatement.setString(3, telejornal.getClassificacao());
-			pStatement.setString(4, telejornal.getDescricao());
-			pStatement.setString(5, telejornal.getGenero());
-			pStatement.setString(6, telejornal.getHorario());
-			pStatement.setString(7, telejornal.getTipo());
-			pStatement.setString(8, telejornal.getTitulo());
-			pStatement.setInt(9, telejornal.getCodTelejornal());
+			pStatement.setString(4, telejornal.getDataPrograma());
+			pStatement.setString(5, telejornal.getDescricao());
+			pStatement.setString(6, telejornal.getGenero());
+			pStatement.setString(7, telejornal.getHorario());
+			pStatement.setString(8, telejornal.getTipo());
+			pStatement.setString(9, telejornal.getTitulo());
+			pStatement.setInt(10, telejornal.getCodTelejornal());
 			pStatement.execute();
 			
 		} catch (SQLException e) {

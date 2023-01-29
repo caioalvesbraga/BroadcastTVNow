@@ -33,12 +33,12 @@ public class TestesUnitarios {
 	 */
 	@Test
 	void testaCadastroPrograma() throws ExceptionDAO {
-		String[] dados1 = {"William Bonner e Renata Vasconscellos", "Rede Globo", "Livre", 
+		String[] dados1 = {"William Bonner e Renata Vasconscellos", "Rede Globo", "Livre", "30/01/2023", 
 				"O telejornal mais tradicional", "Informativo", "20h30min", "Jornal Nacional", };
 		ControleTelejornal controleTelejornal = new ControleTelejornal();
-		assertFalse(controleTelejornal.cadastrarTelejornal(null, null, null, null, null, null, null));
+		assertFalse(controleTelejornal.cadastrarTelejornal(null, null, null, null, null, null, null, null));
 		assertTrue(controleTelejornal.cadastrarTelejornal(dados1[0], dados1[1], dados1[2], dados1[3], 
-				dados1[4], dados1[5],dados1[6]));
+				dados1[4], dados1[5],dados1[6], dados1[7]));
 		
 	}
 	

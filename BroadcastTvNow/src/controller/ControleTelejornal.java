@@ -29,13 +29,14 @@ public class ControleTelejornal {
 	 * @throws ExceptionDAO
 	 */
 	public boolean cadastrarTelejornal(String apresentadores, String canal, String classificacao, 
-			String descricao, String genero, String horario, String titulo) throws ExceptionDAO {
+			String dataPrograma, String descricao, String genero, String horario, String titulo) throws ExceptionDAO {
 		
-		if( apresentadores != null  && apresentadores.length() > 0 && classificacao != null &&
-				classificacao.length() > 0 && descricao != null && descricao.length() > 0 &&
-				horario != null && horario.length() > 0  && titulo != null && titulo.length() > 0) 
+		if(apresentadores != null  && apresentadores.length() > 0 && classificacao != null &&
+				classificacao.length() > 0 && dataPrograma != null && dataPrograma.length() > 0 &&
+				descricao != null && descricao.length() > 0 && horario != null && horario.length() > 0  && 
+				titulo != null && titulo.length() > 0) 
 		{
-			Telejornal telejornal = new Telejornal(apresentadores, canal, classificacao, descricao, genero,
+			Telejornal telejornal = new Telejornal(apresentadores, canal, classificacao, dataPrograma, descricao, genero,
 					 horario, titulo);
 			telejornal.cadastrarTelejornal(telejornal);
 			return true;
@@ -80,14 +81,15 @@ public class ControleTelejornal {
 	 * @throws ExceptionDAO
 	 */
 	public boolean alterarTelejornal(String apresentadores, String canal, String classificacao, 
-			Integer codTelejornal, String descricao, String genero, String horario, String titulo) throws ExceptionDAO{
+			Integer codTelejornal, String data, String descricao, String genero, String horario, 
+			String titulo) throws ExceptionDAO{
 		
 		if(apresentadores != null && apresentadores.length() > 0 && canal != null && canal.length() > 0 && 
 				classificacao != null && classificacao.length() > 0 && descricao != null && 
-				descricao.length() > 0  && genero != null && genero.length() > 0 && horario != null && 
+				data != null && data.length() > 0 && descricao.length() > 0  && genero != null && genero.length() > 0 && horario != null && 
 				horario.length() > 0 && titulo != null && titulo.length() > 0) {
 			
-			Telejornal telejornal = new Telejornal(apresentadores, canal, classificacao, descricao, genero, 
+			Telejornal telejornal = new Telejornal(apresentadores, canal, classificacao, data, descricao, genero, 
 					horario, titulo);
 			telejornal.setCodTelejornal(codTelejornal);
 			telejornal.alterarTelejornal(telejornal);

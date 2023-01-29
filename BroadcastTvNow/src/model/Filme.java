@@ -15,6 +15,9 @@ public class Filme extends Programa{
 	private int avaliacao;
 	private String bilheteria;
 	private int codFilme;
+	private String data;
+
+	
 
 	/**
 	  * O Construtor de Filme define os parâmetros para quando a classe for instanciada
@@ -27,10 +30,10 @@ public class Filme extends Programa{
 	 * @param horario
 	 * @param titulo
 	 */
-	public Filme(int avaliacao, String bilheteria, String canal, String classificacao, 
+	public Filme(int avaliacao, String bilheteria, String canal, String classificacao, String data, 
 			String descricao, String horario, String titulo) {
 		
-		super(canal, classificacao, descricao, horario, "Filme", titulo );
+		super(canal, classificacao, data, descricao, horario, "Filme", titulo );
 		this.avaliacao = avaliacao;
 		this.bilheteria = bilheteria;
 	}

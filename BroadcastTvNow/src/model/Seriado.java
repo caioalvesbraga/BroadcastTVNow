@@ -26,10 +26,10 @@ public class Seriado extends Programa{
 	 * @param qtdTemporadas
 	 * @param titulo
 	 */
-	public Seriado(String canal, String classificacao, String descricao, 
+	public Seriado(String canal, String classificacao, String data, String descricao, 
 			String horario, int qtdEpisodios, int qtdTemporadas, String titulo) {
 		
-		super(canal, classificacao, descricao, horario, "Seriado" ,  titulo); 
+		super(canal, classificacao, data, descricao, horario, "Seriado" ,  titulo); 
 		this.qtdEpisodios = qtdEpisodios;
 		this.qtdTemporadas = qtdTemporadas;
 	}

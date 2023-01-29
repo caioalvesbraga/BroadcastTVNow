@@ -27,10 +27,10 @@ public class Telejornal extends Programa{
 	 * @param tipoDeJornal
 	 * @param titulo
 	 */
-	public Telejornal(String apresentadores, String canal, String classificacao, String descricao,
+	public Telejornal(String apresentadores, String canal, String classificacao, String dataPrograma, String descricao,
 			String genero, String horario, String titulo) {
 		
-		super(canal, classificacao, descricao, horario, "Telejornal",  titulo); 
+		super(canal, classificacao, dataPrograma, descricao, horario, "Telejornal",  titulo); 
 		this.apresentadores = apresentadores;
 		this.genero = genero;
 	}

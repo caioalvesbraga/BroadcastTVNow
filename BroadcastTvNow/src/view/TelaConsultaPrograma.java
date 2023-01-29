@@ -104,6 +104,7 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		tableModel.addColumn("Tipo");
 		tableModel.addColumn("Título");
 		tableModel.addColumn("Horário");
+		tableModel.addColumn("Data");
 		programasTable = new JTable(tableModel);
 		programasTable.setFont(padraoFonte);
 		programasTable.setRowHeight(30);
@@ -148,6 +149,7 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 			ArrayList <Filme> filmes = controleFilme.listarFilmePorTitulo(nome);
 			ArrayList <Seriado> seriados = controleSeriado.listarSeriadoPorTitulo(nome);
 			ArrayList <Telejornal> telejornais = controleTelejornal.listarTelejornalPorTitulo(nome);
+			
 			filmes.forEach((Filme filme) -> {
 				tableModel.addRow(new Object [] {filme.getCodFilme(),
 												 filme.getCanal(),
@@ -155,7 +157,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												 filme.getDescricao(),
 												 filme.getTipo(),
 												 filme.getTitulo(),
-												 filme.getHorario()});
+												 filme.getHorario(),
+												 filme.getDataPrograma()});
 			});
 			seriados.forEach((Seriado seriado) -> {
 				tableModel.addRow(new Object[] {seriado.getCodSeriado(),
@@ -164,7 +167,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												seriado.getDescricao(),
 												seriado.getTipo(),
 												seriado.getTitulo(),
-												seriado.getHorario()});
+												seriado.getHorario(),
+												seriado.getDataPrograma()});
 			});
 			programasTable.setModel(tableModel);
 			
@@ -175,7 +179,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												telejornal.getDescricao(),
 												telejornal.getTipo(),
 												telejornal.getTitulo(),
-												telejornal.getHorario()});
+												telejornal.getHorario(),
+												telejornal.getDataPrograma()});
 			});
 			programasTable.setModel(tableModel);
 		} catch(ExceptionDAO e) {
@@ -206,7 +211,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												 filme.getDescricao(),
 												 filme.getTipo(),
 												 filme.getTitulo(),
-												 filme.getHorario()});
+												 filme.getHorario(),
+												 filme.getDataPrograma()});
 			});
 			seriados.forEach((Seriado seriado) -> {
 				tableModel.addRow(new Object[] {seriado.getCodSeriado(),
@@ -215,7 +221,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												seriado.getDescricao(),
 												seriado.getTipo(),
 												seriado.getTitulo(),
-												seriado.getHorario()});
+												seriado.getHorario(),
+												seriado.getDataPrograma()});
 			});
 			programasTable.setModel(tableModel);
 			
@@ -226,7 +233,8 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 												telejornal.getDescricao(),
 												telejornal.getTipo(),
 												telejornal.getTitulo(),
-												telejornal.getHorario()});
+												telejornal.getHorario(),
+												telejornal.getDataPrograma()});
 			});
 			programasTable.setModel(tableModel);
 		} catch(ExceptionDAO e) {
@@ -298,7 +306,7 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 			
 			this.telaCadastroPrograma.preparaTelejornal(codTelejornal, canal, classificacao, descricao, tipo,  titulo, horario);
 			this.telaCadastroPrograma.mostrarTela();
-			this.consultaFrame.dispose();;
+			this.consultaFrame.dispose();
 			
 		} 
 	}

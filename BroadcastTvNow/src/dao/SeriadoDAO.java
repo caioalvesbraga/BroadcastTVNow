@@ -24,7 +24,7 @@ public class SeriadoDAO {
 	 */
 	public void cadastrarSeriado(Seriado seriado) throws ExceptionDAO{
 		
-		String sql = "insert into seriado (canal, classificação, descrição, horário, qtdEpisódios, qtdTemporadas, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into seriado (canal, classificação, dataPrograma, descrição, horário, qtdEpisódios, qtdTemporadas, tipo, título) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement  pStatement = null;
 		Connection connection = null;
 		
@@ -33,12 +33,13 @@ public class SeriadoDAO {
 			pStatement = connection.prepareStatement(sql);
 			pStatement.setString(1, seriado.getCanal());
 			pStatement.setString(2, seriado.getClassificacao());
-			pStatement.setString(3, seriado.getDescricao());
-			pStatement.setString(4, seriado.getHorario());
-			pStatement.setInt(5, seriado.getQtdEpisodios());
-			pStatement.setInt(6, seriado.getQtdTemporadas());
-			pStatement.setString(7, seriado.getTipo());
-			pStatement.setString(8, seriado.getTitulo());
+			pStatement.setString(3, seriado.getDataPrograma());
+			pStatement.setString(4, seriado.getDescricao());
+			pStatement.setString(5, seriado.getHorario());
+			pStatement.setInt(6, seriado.getQtdEpisodios());
+			pStatement.setInt(7, seriado.getQtdTemporadas());
+			pStatement.setString(8, seriado.getTipo());
+			pStatement.setString(9, seriado.getTitulo());
 			pStatement.execute();
 			
 		} catch(SQLException e) {
@@ -81,6 +82,7 @@ public class SeriadoDAO {
 					seriado.setCodSeriado(rs.getInt("CodSeriado"));
 					seriado.setCanal(rs.getString("Canal"));
 					seriado.setClassificacao(rs.getString("Classificação"));
+					seriado.setDataPrograma(rs.getString("DataPrograma"));
 					seriado.setDescricao(rs.getString("Descrição"));
 					seriado.setHorario(rs.getString("Horário"));
 					seriado.setTitulo(rs.getString("Título"));
@@ -133,6 +135,7 @@ public class SeriadoDAO {
 					seriado.setCodSeriado(rs.getInt("CodSeriado"));
 					seriado.setCanal(rs.getString("Canal"));
 					seriado.setClassificacao(rs.getString("Classificação"));
+					seriado.setDataPrograma(rs.getString("DataPrograma"));
 					seriado.setDescricao(rs.getString("Descrição"));
 					seriado.setHorario(rs.getString("Horário"));
 					seriado.setTitulo(rs.getString("Título"));
@@ -167,7 +170,7 @@ public class SeriadoDAO {
 	 * @throws ExceptionDAO
 	 */
 	public void alterarSeriado(Seriado seriado) throws ExceptionDAO{
-		String sql = "Update Seriado set canal = ?, classificação = ?, descrição = ?, horário = ?, qtdEpisódios = ?, qtdTemporadas = ?, tipo = ?, título = ? where codSeriado = ?";
+		String sql = "Update Seriado set canal = ?, classificação = ?, dataPrograma = ?, descrição = ?, horário = ?, qtdEpisódios = ?, qtdTemporadas = ?, tipo = ?, título = ? where codSeriado = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
 		
@@ -176,13 +179,14 @@ public class SeriadoDAO {
 			pStatement = connection.prepareStatement(sql);
 			pStatement.setString(1, seriado.getCanal());
 			pStatement.setString(2, seriado.getClassificacao());
-			pStatement.setString(3, seriado.getDescricao());
-			pStatement.setString(4, seriado.getHorario());
-			pStatement.setInt(5, seriado.getQtdEpisodios());
-			pStatement.setInt(6, seriado.getQtdTemporadas());
-			pStatement.setString(7, seriado.getTipo());
-			pStatement.setString(8, seriado.getTitulo());
-			pStatement.setInt(9, seriado.getCodSeriado());
+			pStatement.setString(3, seriado.getDataPrograma());
+			pStatement.setString(4, seriado.getDescricao());
+			pStatement.setString(5, seriado.getHorario());
+			pStatement.setInt(6, seriado.getQtdEpisodios());
+			pStatement.setInt(7, seriado.getQtdTemporadas());
+			pStatement.setString(8, seriado.getTipo());
+			pStatement.setString(9, seriado.getTitulo());
+			pStatement.setInt(10, seriado.getCodSeriado());
 			pStatement.execute();
 			
 		} catch (SQLException e) {

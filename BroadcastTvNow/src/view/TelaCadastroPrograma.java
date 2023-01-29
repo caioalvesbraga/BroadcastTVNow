@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -24,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import controller.ControleCanal;
 import controller.ControleFilme;
@@ -44,13 +46,17 @@ public class TelaCadastroPrograma implements ActionListener{
 	private JLabel classificacaoIndicativaLabel = new JLabel("Classificação");
 	private JLabel horarioLabel = new JLabel("Horário");
 	private JLabel generoLabel = new JLabel("Gênero");
-	private JLabel duracaoLabel = new JLabel("<html><p>Duração<br>em minutos</p></html>");
+	private JLabel dataLabel = new JLabel("Data");
 	private JLabel canalLabel = new JLabel("Canal");
 	private JLabel descricaoLabel = new JLabel("Descrição");
-	private JTextField tituloTextField = new JTextField();
-	private JTextField horarioTextField = new JTextField("0h0min");
-	private JTextField duracaoTextField = new JTextField("0");
+	private MaskFormatter dataMask = null;
+	private JFormattedTextField dataTextField = new JFormattedTextField("");
 	private JTextArea descricaoTextArea = new JTextArea("");
+	private JTextField tituloTextField = new JTextField();
+	private MaskFormatter horarioMask = null;
+	private JFormattedTextField horarioTextField = new JFormattedTextField("");
+	
+	
 	private ControleCanal controle = new  ControleCanal();
 	private JComboBox<Object> canalComboBox = new JComboBox<Object>();
 	private ComboBoxModel<Object> defaultComboBoxModel = new DefaultComboBoxModel<Object>();{
@@ -115,13 +121,23 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 		
 		//Label
-		tituloLabel.setFont(padraoFonte);
-		Dimension tituloSize = tituloLabel.getPreferredSize();
-		tituloLabel.setBounds(80, 30, tituloSize.width, tituloSize.height);
+		
+		
+		canalLabel.setFont(padraoFonte);
+		Dimension canalSize = canalLabel.getPreferredSize();
+		canalLabel.setBounds(85, 280, canalSize.width+10, canalSize.height);
 		
 		classificacaoIndicativaLabel.setFont(padraoFonte);
 		Dimension classificacaoSize = classificacaoIndicativaLabel.getPreferredSize();
 		classificacaoIndicativaLabel.setBounds(40, 90, classificacaoSize.width + 20, classificacaoSize.height);
+		
+		dataLabel.setFont(padraoFonte);
+		Dimension dataSize = dataLabel.getPreferredSize();
+		dataLabel.setBounds(450, 50, dataSize.width, dataSize.height);
+		
+		descricaoLabel.setFont(padraoFonte);
+		Dimension descricaoSize = descricaoLabel.getPreferredSize();
+		descricaoLabel.setBounds(420, 130, descricaoSize.width+10, descricaoSize.height);
 		
 		horarioLabel.setFont(padraoFonte);
 		Dimension horarioSize = horarioLabel.getPreferredSize();
@@ -131,28 +147,34 @@ public class TelaCadastroPrograma implements ActionListener{
 		Dimension generoSize = generoLabel.getPreferredSize();
 		generoLabel.setBounds(80, 210, generoSize.width, generoSize.height);
 		
-		duracaoLabel.setFont(padraoFonte);
-		Dimension duracaoSize = duracaoLabel.getPreferredSize();
-		duracaoLabel.setBounds(75, 270, duracaoSize.width+10, duracaoSize.height);
-		
-		canalLabel.setFont(padraoFonte);
-		Dimension canalSize = canalLabel.getPreferredSize();
-		canalLabel.setBounds(85, 280, canalSize.width+10, canalSize.height);
-		
-		descricaoLabel.setFont(padraoFonte);
-		Dimension descricaoSize = descricaoLabel.getPreferredSize();
-		descricaoLabel.setBounds(400, 130, descricaoSize.width+10, descricaoSize.height);
+		tituloLabel.setFont(padraoFonte);
+		Dimension tituloSize = tituloLabel.getPreferredSize();
+		tituloLabel.setBounds(80, 30, tituloSize.width, tituloSize.height);
 		
 		//Text Field
+		try {
+			dataMask = new MaskFormatter("##/##/####");
+		} catch(Exception e) {
+			System.err.println("Erro na formatação: " + e.getMessage());
+            System.exit(-1);
+		}
+		dataTextField = new JFormattedTextField(dataMask);
+		dataTextField.setBounds(500, 50, 150, 40);
+		dataTextField.setFont(padraoFonte);
+		
 		tituloTextField.setBounds(160, 30, 200, 30);
 		tituloTextField.setFont(padraoFonte);
 
-		
+		try {
+			horarioMask = new MaskFormatter("##:##");
+		} catch(Exception e) {
+			System.err.println("Erro na formatação: " + e.getMessage());
+            System.exit(-1);
+		}
+		horarioTextField = new JFormattedTextField(horarioMask);
 		horarioTextField.setBounds(160, 150, 60, 30);
 		horarioTextField.setFont(padraoFonte);
 		
-		duracaoTextField.setBounds(160, 270, 80, 30);
-		duracaoTextField.setFont(padraoFonte);
 		
 		//TextArea
 		descricaoTextArea.setBounds(500, 130, 250, 150);
@@ -204,14 +226,17 @@ public class TelaCadastroPrograma implements ActionListener{
 		
 		cadastroPanel.add(canalLabel);
 		cadastroPanel.add(classificacaoIndicativaLabel);
+		cadastroPanel.add(dataLabel);
 		cadastroPanel.add(descricaoLabel);
 		cadastroPanel.add(generoLabel);
 		cadastroPanel.add(horarioLabel);
 		cadastroPanel.add(tituloLabel);
 		
+		cadastroPanel.add(dataTextField);
 		cadastroPanel.add(descricaoTextArea);
 		cadastroPanel.add(horarioTextField);
 		cadastroPanel.add(tituloTextField);
+		
 		
 		cadastroPanel.add(canalComboBox);
 		cadastroPanel.add(classificacaoComboBox);
@@ -271,7 +296,6 @@ public class TelaCadastroPrograma implements ActionListener{
 	public void limparTelaCadastroPrograma(java.awt.event.ActionEvent evt) {
 		tituloTextField.setText("");
 		horarioTextField.setText("0h0min");
-		duracaoTextField.setText("0");
 		descricaoTextArea.setText("");
 		canalComboBox.setSelectedIndex(0);
 		classificacaoComboBox.setSelectedIndex(0);
@@ -425,6 +449,7 @@ public class TelaCadastroPrograma implements ActionListener{
 	 */
 	public void salvarPrograma(java.awt.event.ActionEvent evt) {
 		String classificacao = classificacaoComboBox.getSelectedItem().toString();
+		String data = dataTextField.getText();
 		String descricao = descricaoTextArea.getText();
 		String horario = horarioTextField.getText();
 		String tipo = tipoComboBox.getSelectedItem().toString();
@@ -440,7 +465,7 @@ public class TelaCadastroPrograma implements ActionListener{
 					
 					if(this.codFilme == 0) {
 						sucesso = controleFilme.cadastrarFilme(Integer.parseInt(input3), input2, canalSelecionadoF, classificacao,
-							descricao, horario, titulo);
+							data, descricao, horario, titulo);
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "O cadastro do filme "
 									+ "foi realizado com sucesso!");
@@ -451,7 +476,7 @@ public class TelaCadastroPrograma implements ActionListener{
 						}
 					} else {
 						sucesso = controleFilme.alterarFilme(Integer.parseInt(input3), input2, canalSelecionadoF, classificacao, 
-								this.codFilme, descricao, horario, tipo, titulo);
+								this.codFilme, data, descricao, horario, tipo, titulo);
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "A alteração do filme "
 									+ "foi realizada com sucesso!");
@@ -469,7 +494,7 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 					if(this.codSeriado == 0) {
 						sucesso = controleSeriado.cadastrarSeriado(canalSelecionadoS, classificacao, 
-								descricao, horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
+								data, descricao, horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "O cadastro do seriado "
 									+ "foi realizado com sucesso!");
@@ -479,8 +504,9 @@ public class TelaCadastroPrograma implements ActionListener{
 									+ "foram preenchidos corretamente.");
 						}
 					} else {
-						sucesso = controleSeriado.alterarSeriado(canalSelecionadoS, classificacao, this.codSeriado, descricao,
-								horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
+						sucesso = controleSeriado.alterarSeriado(canalSelecionadoS, classificacao, this.codSeriado, data,
+								descricao, horario, Integer.parseInt(input1), Integer.parseInt(input2),titulo);
+						
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "A alteração do seriado "
 									+ "foi realizada com sucesso!");
@@ -498,7 +524,8 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 					if(this.codTelejornal == 0) {
 						sucesso = controleTelejornal.cadastrarTelejornal(input1, canalSelecionadoT, classificacao, 
-								descricao, input3, horario, titulo);
+								data, descricao, input3, horario, titulo);
+						
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "O cadastro do telejornal "
 									+ "foi realizado com sucesso!");
@@ -510,7 +537,7 @@ public class TelaCadastroPrograma implements ActionListener{
 					} else {
 						
 						sucesso = controleTelejornal.alterarTelejornal(input1, canalSelecionadoT, classificacao, 
-								this.codTelejornal, descricao, input3, horario, titulo);
+								this.codTelejornal, data, descricao, input3, horario, titulo);
 						if(sucesso == true) {
 							JOptionPane.showMessageDialog(null, "A alteração do telejornal "
 									+ "foi realizada com sucesso!");

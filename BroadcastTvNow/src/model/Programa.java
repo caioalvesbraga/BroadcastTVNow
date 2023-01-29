@@ -9,6 +9,7 @@ package model;
 public abstract class Programa {
 	protected String canal;
 	protected String classificacao;
+	protected String dataPrograma;
 	protected String descricao;
 	protected String horario;
 	protected String tipo;
@@ -23,11 +24,13 @@ public abstract class Programa {
 	 * @param descricao
 	 * @param horario
 	 * @param titulo
+	 * @param dataPrograma 
 	 */
-	public Programa(String canal, String classificacao, String descricao,String horario,
+	public Programa(String canal, String classificacao, String dataPrograma, String descricao, String horario,
 			String tipo, String titulo) {
 
 		this.classificacao = classificacao;
+		this.dataPrograma = dataPrograma;
 		this.descricao = descricao;
 		this.tipo = tipo;
 		this.horario = horario;
@@ -57,6 +60,15 @@ public abstract class Programa {
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
 	}
+	
+	public String getDataPrograma() {
+		return dataPrograma;
+	}
+
+	public void setDataPrograma(String dataPrograma) {
+		this.dataPrograma = dataPrograma;
+	}
+	
 	
 	public String getDescricao() {
 		return descricao;
