@@ -17,7 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * A classe TelaDetalhePrograma é responsável por receber as informações específicas de cada tipo de Programa
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaDetalhePrograma implements ActionListener{
+	
 	private JPanel detalhePanel = new JPanel(null);
 	private JFrame detalheFrame = new JFrame();
 	private JLabel tituloDialogLabel;
@@ -35,7 +41,9 @@ public class TelaDetalhePrograma implements ActionListener{
 	private Font padraoFonte = new Font("Bodoni MT Condensed", Font.PLAIN, 24);
 	private Font buttonFont = new Font("Bodoni MT Condensed", Font.BOLD, 26);
 	
-	
+	/**
+	 * O método mostrarTela é responsável por definir as características da interface de detalhar programas
+	 */
 	public void mostrarTela(int op) {
 		switch(op) {
 		case 1:
@@ -217,6 +225,10 @@ public class TelaDetalhePrograma implements ActionListener{
 		return input1ComboBox.getSelectedItem().toString();
 	}
 
+	/**
+	 * O método actionPerfomed define os eventos da tela de detalhar programa. Esse evento é especial, pois ele
+	 * define os atributos específicos dos tipos Filme, Seriado e Telejornal.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();

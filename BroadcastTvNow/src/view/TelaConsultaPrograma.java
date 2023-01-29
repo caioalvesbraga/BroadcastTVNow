@@ -27,6 +27,11 @@ import model.Filme;
 import model.Seriado;
 import model.Telejornal;
 
+/**
+ * A classe TelaConsultaPrograma é responsável pela criação da interface de consulta de programas
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaConsultaPrograma implements ActionListener, MouseListener {
 	
 	private JFrame consultaFrame = new JFrame();
@@ -50,12 +55,17 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 	};
 	private String tipoBusca;
 	
+	/**
+	 * O contrutor TelaConsultaPrograma define como será utilizado o valor do atributo tipoBusca, que é 
+	 * imprescindível na busca de programas por título ou canal
+	 * @param tipoBusca
+	 */
 	public TelaConsultaPrograma(String tipoBusca) {
 		this.tipoBusca = tipoBusca;
 	}
 		
 	/**
-	 * 
+	 * O método mostrarTela é responsável por definir as características da interface de consulta de programa
 	 */
 	public void mostrarTela() {
 			
@@ -122,6 +132,10 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		
 	}
 	
+	/**
+	 * O método listarProgramaPorTitulo implementa a listagem ordenada por titulo na tabela de consulta de programa
+	 * @param evt
+	 */
 	public void listarProgramaPorTitulo(java.awt.event.ActionEvent evt) {
 		String nome = buscaTextField.getText();
 		DefaultTableModel tableModel = (DefaultTableModel) programasTable.getModel();
@@ -169,6 +183,10 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		}
 	}
 	
+	/**
+	 * O método listarProgramaPorCanal implementa a listagem ordenada por canal na tabela de consulta de programa
+	 * @param evt
+	 */
 	public void listarProgramaPorCanal(java.awt.event.ActionEvent evt) {
 		String nome = buscaTextField.getText();
 		DefaultTableModel tableModel = (DefaultTableModel) programasTable.getModel();
@@ -216,6 +234,12 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		}
 	}
 	
+	/**
+	 * O método programasTableFilmeMouseClicked define o comportamento de clique do mouse e troca dados
+	 * com a tela de cadastro para possibilitar a edição ou exclusão de filmes
+	 * @param evt
+	 * @throws ExceptionDAO
+	 */
 	public void programasTableFilmeMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
 		if(evt.getClickCount() == 2) {
 			Integer codFilme = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
@@ -233,6 +257,12 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		} 
 	}
 	
+	/**
+	 * O método programasTableSeriadoMouseClicked define o comportamento de clique do mouse e troca dados
+	 * com a tela de cadastro para possibilitar a edição ou exclusão de seriados
+	 * @param evt
+	 * @throws ExceptionDAO
+	 */
 	public void programasTableSeriadoMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
 		if(evt.getClickCount() == 2) {
 			Integer codSeriado = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
@@ -250,6 +280,12 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		} 
 	}
 	
+	/**
+	 * O método programasTableTelejornalMouseClicked define o comportamento de clique do mouse e troca dados
+	 * com a tela de cadastro para possibilitar a edição ou exclusão de telejornais
+	 * @param evt
+	 * @throws ExceptionDAO
+	 */
 	public void programasTableTelejornalMouseClicked(java.awt.event.MouseEvent evt) throws ExceptionDAO {
 		if(evt.getClickCount() == 2) {
 			Integer codTelejornal = (Integer) programasTable.getModel().getValueAt(programasTable.getSelectedRow(), 0);
@@ -266,7 +302,10 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 			
 		} 
 	}
-
+	
+	/**
+	 * O método actionPerfomed define os eventos da tela de consulta
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
@@ -280,7 +319,10 @@ public class TelaConsultaPrograma implements ActionListener, MouseListener {
 		}
 		
 	}
-
+	
+	/**
+	 * O método mouseClicked define um evento para o click do mouse
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object src = e.getSource();

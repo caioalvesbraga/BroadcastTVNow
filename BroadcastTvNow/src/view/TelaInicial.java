@@ -15,6 +15,12 @@ import javax.swing.*;
 
 import dao.ExceptionDAO;
 
+/**
+ * A classe TelaInicial é responsável pela criação da primeira interface gráfica que será disponibilizada para 
+ * o usuário
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaInicial implements ActionListener{
 	
 	private JMenuBar barraDeMenu = new JMenuBar ();
@@ -30,7 +36,9 @@ public class TelaInicial implements ActionListener{
 	private JLabel iconeTVLabel = new JLabel(new ImageIcon("./tv128px.png"));
 	private Font padraoFonte = new Font("Bodoni MT Condensed", Font.PLAIN, 24);
 	
-	
+	/**
+	 * O Construtor TelaInicial define as características da tela inicial
+	 */
 	public TelaInicial() {
 		
 		//Barra de Menu
@@ -94,11 +102,18 @@ public class TelaInicial implements ActionListener{
 		telaInicialFrame.setVisible(true);	
 	}
 	
+	/**
+	 * O método main é responsável por executar a aplicação
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		TelaInicial tela1 = new TelaInicial();
 		
 	}
-
+	
+	/**
+	 * O método actionPerfomed define os eventos da tela inicial
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();

@@ -4,8 +4,19 @@ import org.junit.jupiter.api.Test;
 import controller.*;
 import dao.ExceptionDAO;
 
+/**
+ * A classe TestesUnitarios realiza os testes da aplicação, verificando se os valores de retorno dos métodos
+ * e se esses retornos são de acordo com o esperado. Esses métodos são imprescindíveis para o funcionamento
+ * do programa
+ * @author Caio Alves Braga
+ *
+ */
 public class TestesUnitarios {
 	
+	/**
+	 * O método testaCadastroCanal verifica se o retorno do cadastro de canal é de acordo com o esperado
+	 * @throws ExceptionDAO
+	 */
 	@Test
 	void testaCadastroCanal() throws ExceptionDAO {
 		String [] dados1 = {"", "0", "" };
@@ -16,8 +27,11 @@ public class TestesUnitarios {
 		
 	}
 	
+	/**
+	 * O método testaCadastroPrograma verifica se o retorno do cadastro de programa é de acordo com o esperado
+	 * @throws ExceptionDAO
+	 */
 	@Test
-	
 	void testaCadastroPrograma() throws ExceptionDAO {
 		String[] dados1 = {"William Bonner e Renata Vasconscellos", "Rede Globo", "Livre", 
 				"O telejornal mais tradicional", "Informativo", "20h30min", "Jornal Nacional", };
@@ -28,6 +42,10 @@ public class TestesUnitarios {
 		
 	}
 	
+	/**
+	 * O método testaAlteraCanal verifica se o retorno da alteração de canal é de acordo com o esperado
+	 * @throws ExceptionDAO
+	 */
 	@Test
 	void testaAlteraCanal() throws ExceptionDAO {
 		String[] dados1 = {null, "0", null};

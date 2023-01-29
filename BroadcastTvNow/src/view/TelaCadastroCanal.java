@@ -13,7 +13,13 @@ import javax.swing.text.MaskFormatter;
 import controller.ControleCanal;
 import dao.ExceptionDAO;
 
+/**
+ * A classe TelaCadastroCanal cria a interface gráfica para cadastrar canais
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaCadastroCanal implements ActionListener {
+	
 	private JFrame cadastroFrame = new JFrame();
 	private JLabel tituloLabel;
 	private JLabel emissoraLabel = new JLabel("Emissora");
@@ -36,7 +42,9 @@ public class TelaCadastroCanal implements ActionListener {
 	//Atributo oculto
 	private Integer codCanal = 0;
 	
-	
+	/**
+	 * O método mostraTela define as caracterítsticas da interface de cadastro de canais
+	 */
 	public void mostrarTela() {
 		
 		//Tela
@@ -124,12 +132,22 @@ public class TelaCadastroCanal implements ActionListener {
 		
 	}
 	
+	/**
+	 * O método limparTelaCadastroCanal redefine os valores dos campos para deixá-los prontos para receber um 
+	 * novo input
+	 * @param evt
+	 */
 	public void limparTelaCadastroCanal(java.awt.event.ActionEvent evt) {
 		emissoraTextField.setText("");
 		numeroTextField.setText("");
 		tipoComboBox.setSelectedIndex(0);
 	}
 	
+	/**
+	 * O método apagarCanal realiza a comunicação com a classe ControleCanal e envia o código do canal a ser 
+	 * apagado do banco de dados
+	 * @param evt
+	 */
 	public void apagarCanal(java.awt.event.ActionEvent evt) {
 		boolean sucesso = false;
 		ControleCanal controleCanal = new ControleCanal();
@@ -146,7 +164,15 @@ public class TelaCadastroCanal implements ActionListener {
 		}
 	}
 	
-	public void buscarCanal(Integer codCanal, String emissora, Integer numero, String tipo) {
+	/**
+	 * O método alteraInputCanal pega os dados de um canal de seus parâmetro e preenche os campos com esses valores
+	 * para que esses possam ser editados 
+	 * @param codCanal
+	 * @param emissora
+	 * @param numero
+	 * @param tipo
+	 */
+	public void alteraInputCanal(Integer codCanal, String emissora, Integer numero, String tipo) {
 		this.codCanal = codCanal;
 		this.emissoraTextField.setText(emissora);
 		this.numeroTextField.setText(numero.toString());
@@ -156,6 +182,12 @@ public class TelaCadastroCanal implements ActionListener {
 		}
 	}
 	
+	/**
+	 * O método salvarCanal se comunica com a classe ControleCanal e envia para essa os dados preenchidos pelos
+	 * campos de input. Além disso, essa classe envia as alterações dos dados para a controle realizar a operação
+	 * de UPDATE 
+	 * @param evt
+	 */
 	public void salvarCanal(java.awt.event.ActionEvent evt) {
 		
 		boolean sucesso = false;
@@ -193,6 +225,9 @@ public class TelaCadastroCanal implements ActionListener {
 		}
 	}
 	
+	/*
+	 * O método actionPerformed define os eventos a serem realizados pela classe
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();

@@ -21,6 +21,11 @@ import controller.ControleCanal;
 import dao.ExceptionDAO;
 import model.Canal;
 
+/**
+ * A classe TelaConsultaCanal é responsável pela criação da interface de consulta de canais
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaConsultaCanal implements ActionListener, MouseListener{
 	private JFrame consultaFrame = new JFrame();
 	private JLabel tituloLabel;
@@ -41,6 +46,10 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 			return false;
 		}
 	};
+	
+	/**
+	 * O método mostrarTela define as característica da tela de consulta
+	 */
 	public void mostrarTela() {
 			
 		//Tela
@@ -102,6 +111,10 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 		
 	}
 	
+	/**
+	 * O método consultaCanal é responsável por receber os dados da ControleCanal e listá-los na tabela
+	 * @param evt
+	 */
 	public void consultaCanal(java.awt.event.ActionEvent evt) {
 		String nome = buscaTextField.getText();
 		DefaultTableModel tableModel = (DefaultTableModel) canaisTable.getModel();
@@ -129,13 +142,16 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 			Integer numero = (Integer) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 2);
 			String tipo = (String) canaisTable.getModel().getValueAt(canaisTable.getSelectedRow(), 3);
 			
-			this.telaCadastroCanal.buscarCanal(codCanal, emissora, numero, tipo);
+			this.telaCadastroCanal.alteraInputCanal(codCanal, emissora, numero, tipo);
 			this.telaCadastroCanal.mostrarTela();
 			this.consultaFrame.dispose();;
 			
 		} 
 	}
-
+	
+	/**
+	 * O método actionPerfomed define os eventos da tela de consulta
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
@@ -144,7 +160,10 @@ public class TelaConsultaCanal implements ActionListener, MouseListener{
 			consultaCanal(e);
 		}
 	}
-
+	
+	/**
+	 * O método mouseClicked define um evento para o click do mouse
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object src = e.getSource();

@@ -32,6 +32,11 @@ import controller.ControleTelejornal;
 import dao.ExceptionDAO;
 import model.Canal;
 
+/**
+ * A classe TelaCadastroPrograma cria a interface gráfica para cadastrar programas
+ * @author Caio Alves Braga
+ *
+ */
 public class TelaCadastroPrograma implements ActionListener{
 	private JFrame cadastroFrame = new JFrame();
 	private JLabel tituloFrameLabel;
@@ -84,10 +89,17 @@ public class TelaCadastroPrograma implements ActionListener{
 	private Integer codSeriado = 0;
 	private Integer codTelejornal = 0;
 	
+	/**
+	 * O construtor TelaCadastroPrograma define que Intancia será a própria TelaCadastroPrograma
+	 */
 	public TelaCadastroPrograma() {
 		Instancia = this;
 	}
 		
+	/**
+	 * O método mostrarTela define as características da tela de cadastro de programas
+	 * @throws ExceptionDAO
+	 */
 	public void mostrarTela() throws ExceptionDAO {
 		//Tela
 		cadastroFrame.setIconImage(iconeTVGrandeImage.getImage());
@@ -250,6 +262,12 @@ public class TelaCadastroPrograma implements ActionListener{
 	
 	
 	//Eventos
+	
+	/**
+	 * O método limparTelaCadastroPrograma redefine os valores dos campos de input, colocando-os com o valor 
+	 * padrão
+	 * @param evt
+	 */
 	public void limparTelaCadastroPrograma(java.awt.event.ActionEvent evt) {
 		tituloTextField.setText("");
 		horarioTextField.setText("0h0min");
@@ -260,6 +278,11 @@ public class TelaCadastroPrograma implements ActionListener{
 		tipoComboBox.setSelectedIndex(0);
 	}
 	
+	/**
+	 * O método apagarPrograma se comunica com a classe controlePrograma, enviando o código associado ao programa
+	 * para que assim seja possível excluí-lo
+	 * @param evt
+	 */
 	public void apagarPrograma(java.awt.event.ActionEvent evt) {
 		boolean sucesso = false;
 		ControleFilme controleFilme = new ControleFilme();
@@ -301,6 +324,17 @@ public class TelaCadastroPrograma implements ActionListener{
 		}
 	}
 	
+	/**
+	 * O método preparaFilme redefine os valores dos campos de input para os valores definidos nos seus parâmetros
+	 * Obs: codFilme é imprescindível para alteração e exclusão de Filmes
+	 * @param codFilme
+	 * @param canal
+	 * @param classificacao
+	 * @param descricao
+	 * @param tipo
+	 * @param titulo
+	 * @param horario
+	 */
 	public void preparaFilme(Integer codFilme, String canal, String classificacao, String descricao, 
 			String tipo,  String titulo, String horario) {
 		this.codFilme = codFilme;
@@ -321,6 +355,17 @@ public class TelaCadastroPrograma implements ActionListener{
 		this.horarioTextField.setText(horario);
 	}
 	
+	/**
+	 * O método preparaSeriado redefine os valores dos campos de input para os valores definidos nos seus parâmetros
+	 * Obs: codSeriado é imprescindível para alteração e exclusão de Seriado
+	 * @param codSeriado
+	 * @param canal
+	 * @param classificacao
+	 * @param descricao
+	 * @param tipo
+	 * @param titulo
+	 * @param horario
+	 */
 	public void preparaSeriado(Integer codSeriado, String canal, String classificacao, String descricao, 
 			String tipo,  String titulo, String horario) {
 		this.codSeriado = codSeriado;
@@ -341,6 +386,17 @@ public class TelaCadastroPrograma implements ActionListener{
 		this.horarioTextField.setText(horario);
 	}
 	
+	/**
+	 * O método preparaTelejornal redefine os valores dos campos de input para os valores definidos nos seus parâmetros
+	 * Obs: codTelejornal é imprescindível para alteração e exclusão de Telejornal
+	 * @param codTelejornal
+	 * @param canal
+	 * @param classificacao
+	 * @param descricao
+	 * @param tipo
+	 * @param titulo
+	 * @param horario
+	 */
 	public void preparaTelejornal(Integer codTelejornal, String canal, String classificacao, String descricao, 
 			String tipo,  String titulo, String horario) {
 		
@@ -362,7 +418,11 @@ public class TelaCadastroPrograma implements ActionListener{
 		this.horarioTextField.setText(horario);
 	}
 	
-	
+	/**
+	 * O método salvarPrograma se comunica com a classe ControlePrograma e envia os dados de cada tipo 
+	 * de programa para que possam ser alterados ou cadastrados
+	 * @param evt
+	 */
 	public void salvarPrograma(java.awt.event.ActionEvent evt) {
 		String classificacao = classificacaoComboBox.getSelectedItem().toString();
 		String descricao = descricaoTextArea.getText();
@@ -469,7 +529,9 @@ public class TelaCadastroPrograma implements ActionListener{
 		}
 		
 	}
-	
+	/**
+	 * O método actionPerfomed define os eventos da tela de cadastro
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
